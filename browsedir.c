@@ -28,11 +28,11 @@ _PUBLIC void browse_dir(char* path, unsigned int rec_level, long *nb_files, long
 			char* buffer = build_path(path, ent->d_name);
 			if( !strcmp(ent->d_name,".") ==0 && !strcmp(ent->d_name, "..") == 0){
 				if(ent->d_type == DT_DIR ){					/* Directory */
-					print_dir(ent, rec_level);
+					print_dir(path, ent, rec_level);
 					++*(nb_folders);
 					browse_dir(buffer, rec_level+1,nb_files,nb_folders);
 				}else{
-					print_file(ent, rec_level);
+					print_file(path, ent, rec_level);
 					(*nb_files)++;
 				}
 			}
@@ -40,7 +40,7 @@ _PUBLIC void browse_dir(char* path, unsigned int rec_level, long *nb_files, long
 		}
 	} else {
 		/* could not open directory */
-		perror ("");
+		perror ("browsed: ");
 		exit(-1);
 	}
 	closedir(dir);	
@@ -60,25 +60,33 @@ _PRIVATE char* build_path(char* path, char* filename)
 	return buffer;
 }
 
-_PRIVATE void print_dir(struct dirent *ent, unsigned int rec_level)
+_PRIVATE void print_dir(char* path, struct dirent *ent, unsigned int rec_level)
 {
 	int i;
 	for(i=0; i<rec_level;i++)
 		printf(TAB);
-	printf("%s %s\n",DIR_SYM,ent->d_name);
+	printf("%s %s ",DIR_SYM,ent->d_name);
+	print_size(path);
 }
 
-_PRIVATE void print_file(struct dirent *ent, unsigned int rec_level)
+_PRIVATE void print_file(char * path, struct dirent *ent, unsigned int rec_level)
 {
 	int i;
 	for( i=1; i<rec_level+1;i++)
 		printf("  ");
-	printf("%s %s\n",FILE_SYM,ent->d_name);
+	printf("%s %s ",FILE_SYM,ent->d_name);
+	print_size(path);
 }
 
 _PRIVATE void print_total(long nb_files, long nb_folders)
 {
 	printf("\nTotal:\n\t%ld Files\n\t%ld Folders\n",nb_files,nb_folders);
+}
+
+_PRIVATE void print_size( char* path){
+	struct stat file_status;
+	stat(path, &file_status);
+	printf("- %d Bytes\n", (int)file_status.st_size);
 }
 
 _PUBLIC int main(int argc, char** argv)

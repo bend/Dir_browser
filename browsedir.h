@@ -30,10 +30,12 @@
 
 _PROTOTYPE( void browse_dir, (char* path, unsigned int rec_level, long *nb_files, long *nb_folders)		);
 
-_PROTOTYPE( void print_dir,  (struct dirent* ent, unsigned int rec_level)								);
+_PROTOTYPE( void print_dir,  (char* path, struct dirent* ent, unsigned int rec_level)								);
 
-_PROTOTYPE( void print_file, (struct dirent* ent, unsigned int rec_level)								);
+_PROTOTYPE( void print_file, (char* path, struct dirent* ent, unsigned int rec_level)								);
 
 _PROTOTYPE( void print_total, (long nb_files, long nb_folders)											);
 
 _PROTOTYPE( char* build_path, (char* path, char* filename)												);
+
+_PROTOTYPE( void print_size, (char* path)																);
