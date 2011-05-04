@@ -18,23 +18,22 @@
 
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
 
-#define MAX_PATH	4096	/* Maximum length of the path */
-#define DIR_SYM		"+"		/* The directory symbol */
-#define FILE_SYM	"|"		/* The File symbol */
-#define TAB			"  "	/* The default tabultation */
+#include "global.h"
 
 
-void browse_dir(char* path, unsigned int rec_level, long *nb_files, long *nb_folders);
 
-void print_dir(struct dirent* ent, unsigned int rec_level);
+_PROTOTYPE( void browse_dir, (char* path, unsigned int rec_level, long *nb_files, long *nb_folders)		);
 
-void print_file(struct dirent* ent, unsigned int rec_level);
+_PROTOTYPE( void print_dir,  (struct dirent* ent, unsigned int rec_level)								);
 
-void print_total(long nb_files, long nb_folders);
+_PROTOTYPE( void print_file, (struct dirent* ent, unsigned int rec_level)								);
 
-char* build_path(char* path, char* filename);
+_PROTOTYPE( void print_total, (long nb_files, long nb_folders)											);
+
+_PROTOTYPE( char* build_path, (char* path, char* filename)												);

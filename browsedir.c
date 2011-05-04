@@ -18,7 +18,8 @@
 
 #include "browsedir.h"
 
-void browse_dir(char* path, unsigned int rec_level, long *nb_files, long *nb_folders){
+_PUBLIC void browse_dir(char* path, unsigned int rec_level, long *nb_files, long *nb_folders)
+{
 	DIR *dir = opendir(path);
 	struct dirent *ent;
 	if (dir != NULL) {
@@ -40,12 +41,13 @@ void browse_dir(char* path, unsigned int rec_level, long *nb_files, long *nb_fol
 	} else {
 		/* could not open directory */
 		perror ("");
-		return;
+		exit(-1);
 	}
 	closedir(dir);	
 }
 
-char* build_path(char* path, char* filename){
+_PRIVATE char* build_path(char* path, char* filename)
+{
 	char* buffer;
 	buffer = malloc(sizeof(char)*MAX_PATH);
 	if(buffer == NULL){
@@ -58,30 +60,34 @@ char* build_path(char* path, char* filename){
 	return buffer;
 }
 
-void print_dir(struct dirent *ent, unsigned int rec_level){
+_PRIVATE void print_dir(struct dirent *ent, unsigned int rec_level)
+{
 	int i;
 	for(i=0; i<rec_level;i++)
 		printf(TAB);
 	printf("%s %s\n",DIR_SYM,ent->d_name);
 }
 
-void print_file(struct dirent *ent, unsigned int rec_level){
+_PRIVATE void print_file(struct dirent *ent, unsigned int rec_level)
+{
 	int i;
 	for( i=1; i<rec_level+1;i++)
 		printf("  ");
 	printf("%s %s\n",FILE_SYM,ent->d_name);
 }
 
-void print_total(long nb_files, long nb_folders){
+_PRIVATE void print_total(long nb_files, long nb_folders)
+{
 	printf("\nTotal:\n\t%ld Files\n\t%ld Folders\n",nb_files,nb_folders);
 }
 
-int main(int argc, char** argv){
+_PUBLIC int main(int argc, char** argv)
+{
 	long nb_files=0, nb_folders=0;
-	if(argc>0){
+	if(argc>1){
 		browse_dir(argv[1], 0,&nb_files,&nb_folders);
 		print_total(nb_files, nb_folders);
-	}else printf("Please provide filename");
+	}else printf("Please provide filename\n");
 	return 1;
 }
 
