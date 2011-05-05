@@ -23,10 +23,10 @@
 #include "print.h"
 _PUBLIC int main(int argc, char** argv)
 {
-	unsigned long nb_files=0, nb_folders=0, size=0;
 	if(argc>1){
-		browse_dir(argv[1], 0,&nb_files,&nb_folders);
-		print_total(nb_files, nb_folders, size);
+		status *stat;
+		alloc_status(&stat);
+		browse_dir(argv[1], 0, stat);
 	}else printf("Please provide filename\n");
 	return 1;
 }

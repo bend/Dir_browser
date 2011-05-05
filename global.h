@@ -21,6 +21,8 @@
 #define _PUBLIC
 #define _PRIVATE
 
+#define SUCCESS										0		/* Success code */
+#define FAILURE										-1		/* Failure code */
 #define MAX_PATH									4096	/* Maximum length of the path */
 #define DIR_SYM										"+"		/* The directory symbol */
 #define FILE_SYM									"|"		/* The File symbol */

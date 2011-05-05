@@ -28,10 +28,19 @@
 #include "global.h"
 #include "print.h"
 
+typedef struct status status;
 
-_PROTOTYPE( void browse_dir, (char* path, unsigned int rec_level, unsigned long *nb_files, unsigned long *nb_folders)		);
+struct status{
+	unsigned long nb_files;
+	unsigned long nb_folders;
+	unsigned long size_byte;
+};
 
-_PROTOTYPE( char* build_path, (char* path, char* filename)												);
+_PROTOTYPE( int alloc_status, (status** stat)										);
+
+_PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* stat )		);
+
+_PROTOTYPE( int build_path, (char* path, char* filename, char** res )				);
 
 
 #endif
