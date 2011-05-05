@@ -15,7 +15,8 @@
  *
  * =====================================================================================
  */
-
+#ifndef __GLOBAL_H__
+#define __GLOBAL_H__
 #define _PROTOTYPE( function,  params  )			function params 
 #define _PUBLIC
 #define _PRIVATE
@@ -24,3 +25,5 @@
 #define DIR_SYM										"+"		/* The directory symbol */
 #define FILE_SYM									"|"		/* The File symbol */
 #define TAB											"    "	/* The default tabultation */
+
+#endif
