@@ -18,18 +18,6 @@
 
 #include "browsedir.h"
 
-_PUBLIC int alloc_status(status **stat)
-{
-	*stat = malloc(sizeof(status));
-	if(*stat == NULL){
-		perror("Malloc failed");
-		return FAILURE;
-	}
-	(*stat)->nb_folders = 0;
-	(*stat)->nb_files   = 0;
-	(*stat)->size_byte  = 0;
-	return SUCCESS;
-}
 
 _PUBLIC int browse_dir(char* path, unsigned int rec_level, status *stat)
 {
@@ -42,11 +30,11 @@ _PUBLIC int browse_dir(char* path, unsigned int rec_level, status *stat)
 				return FAILURE;
 			if( !strcmp(ent->d_name,".") ==0 && !strcmp(ent->d_name, "..") == 0){
 				if(ent->d_type == DT_DIR ){					/* Directory */
-					print_dir(path, ent, rec_level);
+					print_dir(path, ent, rec_level,stat);
 					stat->nb_folders++;
 					browse_dir(buffer, rec_level+1, stat);
 				}else{
-					print_file(path, ent, rec_level);
+					print_file(path, ent, rec_level,stat);
 					stat->nb_files++;
 				}
 			}

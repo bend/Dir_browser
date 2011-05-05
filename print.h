@@ -24,12 +24,15 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "global.h"
+#include "browsedir.h"
+#include "status.h"
 
 
-_PROTOTYPE( void print_dir, (char* path, struct dirent *ent, unsigned int rec_level )						);
-_PROTOTYPE( void print_file, (char* path, struct dirent *ent, unsigned int rec_level)						);
-_PROTOTYPE( void print_size, (char* path)																	);
-_PROTOTYPE( void print_total, (unsigned long nb_files, unsigned long nb_folders, unsigned long byte_size)	);
+_PROTOTYPE( void print_dir, (char* path, struct dirent *ent, unsigned int rec_level, status* stat )						);
+_PROTOTYPE( void print_file, (char* path, struct dirent *ent, unsigned int rec_level, status* stat)						);
+_PROTOTYPE( void print_size, (char* path, status* stat)																	);
+_PROTOTYPE( void print_total, (status *stat)																);
 
 #endif

@@ -21,12 +21,17 @@
 
 #include "browsedir.h"
 #include "print.h"
+#include "status.h"
 _PUBLIC int main(int argc, char** argv)
 {
 	if(argc>1){
 		status *stat;
-		alloc_status(&stat);
-		browse_dir(argv[1], 0, stat);
+		if(alloc_status(&stat) == FAILURE)
+			return EXIT_FAILURE;
+		if(	browse_dir(argv[1], 0, stat) == FAILURE)
+			return EXIT_FAILURE;
+		print_total(stat);
+		free(stat);
 	}else printf("Please provide filename\n");
 	return 1;
 }

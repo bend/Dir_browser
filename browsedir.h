@@ -27,16 +27,7 @@
 
 #include "global.h"
 #include "print.h"
-
-typedef struct status status;
-
-struct status{
-	unsigned long nb_files;
-	unsigned long nb_folders;
-	unsigned long size_byte;
-};
-
-_PROTOTYPE( int alloc_status, (status** stat)										);
+#include "status.h"
 
 _PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* stat )		);
 

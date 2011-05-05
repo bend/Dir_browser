@@ -18,32 +18,32 @@
 
 #include "print.h"
 
-_PRIVATE void print_dir(char* path, struct dirent *ent, unsigned int rec_level)
+_PRIVATE void print_dir(char* path, struct dirent *ent, unsigned int rec_level, status* stat)
 {
 	int i;
 	for(i=0; i<rec_level;i++)
 		printf(TAB);
 	printf("%s %s ",DIR_SYM,ent->d_name);
-	print_size(path);
+	print_size(path,stat);
 }
 
-_PRIVATE void print_file(char * path, struct dirent *ent, unsigned int rec_level)
+_PRIVATE void print_file(char * path, struct dirent *ent, unsigned int rec_level, status* stat)
 {
 	int i;
 	for( i=1; i<rec_level+1;i++)
 		printf("  ");
 	printf("%s %s ",FILE_SYM,ent->d_name);
-	print_size(path);
+	print_size(path,stat);
 }
 
-_PRIVATE void print_total(unsigned long nb_files, unsigned long nb_folders, unsigned long byte_size)
+_PRIVATE void print_total(status *stat)
 {
-	byte_size=1;
-	printf("\nTotal:\n\t%ld Files\n\t%ld Folders\n",nb_files,nb_folders);
+	printf("\nTotal:\n\t%ld Files\n\t%ld Folders\nSize:\n\t%ld\n",stat->nb_files,stat->nb_folders,stat->size_byte);
 }
 
-_PRIVATE void print_size( char* path){
+_PRIVATE void print_size( char* path, status* s){
 	struct stat file_status;
 	stat(path, &file_status);
+	s->size_byte+=(long)file_status.st_size;
 	printf("- %d Bytes\n", (int)file_status.st_size);
 }
