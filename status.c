@@ -31,6 +31,7 @@ PUBLIC int alloc_status(status **stat)
 	return SUCCESS;
 }
 
-PUBLIC void free_status(status* stat){
+PUBLIC void free_status(status* stat)
+{
 	free(stat);
 }

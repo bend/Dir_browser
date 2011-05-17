@@ -17,7 +17,7 @@
  */
 #include "utils.h"
 
-PRIVATE int build_path(char* path, char* filename, char** res)
+PUBLIC int build_path(char* path, char* filename, char** res)
 {
 	*res = malloc(sizeof(char)*MAX_PATH);
 	if(*res == NULL){
@@ -30,12 +30,13 @@ PRIVATE int build_path(char* path, char* filename, char** res)
 	return SUCCESS;
 }
 
-PRIVATE int parse_mode(mode_t mode, char** parsed){
+PUBLIC int parse_mode(mode_t mode, char** parsed)
+{
 	char temp[] = {'-','-','-','-','-','-','-','-','-'};
 	*parsed = malloc(sizeof(char) * 9);
 	if (*parsed == NULL) {
 		perror("Malloc failed");
-		return -1;
+		return FAILURE;
 	}
 
 	if (mode & S_IRUSR) temp[0] = 'r';
@@ -50,5 +51,39 @@ PRIVATE int parse_mode(mode_t mode, char** parsed){
 	if (mode & S_IWOTH) temp[7] = 'w';
 	if (mode & S_IXOTH) temp[8] = 'x';
 	strncpy(*parsed, temp, 9);
-	return 0;
+	return SUCCESS;
 }	
+
+PUBLIC int size_convert(unsigned long size, char** converted)
+{
+	double conv_size;
+	*converted = malloc(sizeof(char) * 256);
+	if (*converted == NULL) {
+		perror("Malloc failed");
+		return FAILURE;
+	}
+
+	/* Check if is Tera */
+	if ((size / 1e12) > 1) {
+		conv_size = size / 1e12;
+		gcvt(conv_size, 5, *converted);
+		strncat(*converted, " TB",3);
+	} else if ((size / 1e9) >1) {
+		conv_size = size / 1e9;
+		gcvt(conv_size, 5, *converted);
+		strncat(*converted, " GB",3);
+	} else if (size / 1e6 > 1) {
+		conv_size = size / 1e6;
+		gcvt(conv_size, 5, *converted);
+		strncat(*converted, " MB",3);
+	} else if (size / 1e3 > 1){
+		conv_size = size / 1e3;
+		gcvt(conv_size, 5, *converted);
+		strncat(*converted, " KB",3);
+	} else {
+		conv_size = size;
+		gcvt(conv_size, 5, *converted);
+		strncat(*converted, " B",3);
+	}
+	return SUCCESS;
+}

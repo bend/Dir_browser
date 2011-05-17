@@ -23,7 +23,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 #include <unistd.h>
 
 
@@ -35,5 +35,7 @@
 _PROTOTYPE( int build_path, (char* path, char* filename, char** res )				);
 
 _PROTOTYPE( int parse_mode, (mode_t mode, char** parsed)							);
+
+_PROTOTYPE( int size_convert, (unsigned long size, char** converted)							);
 
 #endif

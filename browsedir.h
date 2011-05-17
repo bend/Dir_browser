@@ -32,5 +32,6 @@
 
 _PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state )	);
 
+_PROTOTYPE( int start_browse, (char* path, unsigned int rec_level, status* state )	);
 
 #endif

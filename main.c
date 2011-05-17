@@ -28,9 +28,9 @@ PUBLIC int main(int argc, char** argv)
 {
 	if(argc>1){
 		status *stat;
-		if(alloc_status(&stat) == FAILURE)
+		if (alloc_status(&stat) == FAILURE)
 			return EXIT_FAILURE;
-		if(	browse_dir(argv[1], 0, stat) == FAILURE)
+		if (start_browse(argv[1], 0, stat) == FAILURE)
 			return EXIT_FAILURE;
 		print_total(stat);
 		free(stat);
