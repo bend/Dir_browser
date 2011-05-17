@@ -29,6 +29,7 @@
 #include "print.h"
 #include "status.h"
 #include "utils.h"
+#include "color.h"
 
 _PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state )	);
 

@@ -32,6 +32,8 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 				if (ent->d_type == DT_DIR ) {					/* Directory */
 					print_dir(path, ent, rec_level,state);
 					state->nb_folders++;
+					if (state->opt->depth < rec_level)
+						return SUCCESS;							/* Max depth reached */
 					if (browse_dir(buffer, rec_level+1, state) == FAILURE)
 						return FAILURE;
 				} else {
@@ -63,9 +65,14 @@ PUBLIC int start_browse(char* path, unsigned int rec_level, status *state)
 	}
 
 	/* it's a file , so we print it */
-	printf("%s ", path);	
-	if (print_mode(path) == FAILURE)
-		return -1;
+	if (state->opt->color == ON)
+		printf("%s%s ",BLUE, path);
+	else 
+		printf("%s ", path);
+	if (state->opt->mode == ON && state->opt->verbose == ON) {	
+		if (print_mode(path, state) == FAILURE)
+			return -1;
+	}
 	if (print_size(path, state) == FAILURE)
 		return -1;
 	state->nb_files++;

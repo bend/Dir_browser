@@ -20,6 +20,7 @@
 #define __STATUS_H__
 
 #include "global.h"
+#include "opt.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,6 +30,7 @@ struct status{
 	unsigned long nb_files;
 	unsigned long nb_folders;
 	unsigned long size_byte;
+	options *opt;
 };
 
 _PROTOTYPE( int alloc_status, (status** stat)		);

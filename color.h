@@ -33,3 +33,4 @@
 #define   LIGHT_MAGENTA	       	"\033[01;35m"
 #define   LIGHT_CYAN   	       	"\033[01;36m"
 #define   WHITE        	       	"\033[01;37m"
+#define   DEFAULT				"\033[0m"

@@ -23,6 +23,7 @@
 #include "print.h"
 #include "status.h"
 #include "global.h"
+#include "opt.h"
 
 PUBLIC int main(int argc, char** argv)
 {
