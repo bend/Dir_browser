@@ -22,7 +22,9 @@
 #include "browsedir.h"
 #include "print.h"
 #include "status.h"
-_PUBLIC int main(int argc, char** argv)
+#include "global.h"
+
+PUBLIC int main(int argc, char** argv)
 {
 	if(argc>1){
 		status *stat;

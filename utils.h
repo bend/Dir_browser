@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  browsedir.h
+ *       Filename:  utils.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  03.05.2011 12:37:19
+ *        Created:  17.05.2011 17:02:41
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,21 +16,24 @@
  * =====================================================================================
  */
 
-#ifndef __BROWSEDIR_H__
-#define __BROWSEDIR_H__
+#ifndef __UTILS_H__
+#define __UTILS_H__
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <unistd.h>
+
+
 
 #include "global.h"
 #include "print.h"
 #include "status.h"
-#include "utils.h"
 
-_PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state )	);
+_PROTOTYPE( int build_path, (char* path, char* filename, char** res )				);
 
+_PROTOTYPE( int parse_mode, (mode_t mode, char** parsed)							);
 
 #endif

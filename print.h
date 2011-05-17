@@ -28,11 +28,12 @@
 #include "global.h"
 #include "browsedir.h"
 #include "status.h"
+#include "utils.h"
 
+_PROTOTYPE( void print_dir, (char* path, struct dirent *ent, unsigned int rec_level, status* state )						);
+_PROTOTYPE( void print_file, (char* path, struct dirent *ent, unsigned int rec_level, status* state)						);
+_PROTOTYPE( int print_size, (char* path, status* state)																	);
+_PROTOTYPE( void print_total, (status *state)																);
 
-_PROTOTYPE( void print_dir, (char* path, struct dirent *ent, unsigned int rec_level, status* stat )						);
-_PROTOTYPE( void print_file, (char* path, struct dirent *ent, unsigned int rec_level, status* stat)						);
-_PROTOTYPE( void print_size, (char* path, status* stat)																	);
-_PROTOTYPE( void print_total, (status *stat)																);
-
+_PROTOTYPE( int print_mode, (char* path )													);
 #endif

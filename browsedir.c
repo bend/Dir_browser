@@ -19,7 +19,7 @@
 #include "browsedir.h"
 
 
-_PUBLIC int browse_dir(char* path, unsigned int rec_level, status *stat)
+PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 {
 	DIR *dir = opendir(path);
 	struct dirent *ent;
@@ -30,12 +30,12 @@ _PUBLIC int browse_dir(char* path, unsigned int rec_level, status *stat)
 				return FAILURE;
 			if( !strcmp(ent->d_name,".") ==0 && !strcmp(ent->d_name, "..") == 0){
 				if(ent->d_type == DT_DIR ){					/* Directory */
-					print_dir(path, ent, rec_level,stat);
-					stat->nb_folders++;
-					browse_dir(buffer, rec_level+1, stat);
+					print_dir(path, ent, rec_level,state);
+					state->nb_folders++;
+					browse_dir(buffer, rec_level+1, state);
 				}else{
-					print_file(path, ent, rec_level,stat);
-					stat->nb_files++;
+					print_file(path, ent, rec_level,state);
+					state->nb_files++;
 				}
 			}
 			free(buffer);
@@ -48,15 +48,3 @@ _PUBLIC int browse_dir(char* path, unsigned int rec_level, status *stat)
 	return SUCCESS;
 }
 
-_PRIVATE int build_path(char* path, char* filename, char** res)
-{
-	*res = malloc(sizeof(char)*MAX_PATH);
-	if(*res == NULL){
-		perror("Malloc failed");
-		return FAILURE;
-	}
-	strcpy(*res, path);
-	strcat(*res, "/");
-	strcat(*res, filename);
-	return SUCCESS;
-}

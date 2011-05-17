@@ -18,7 +18,7 @@
 
 #include "status.h"
 
-_PUBLIC int alloc_status(status **stat)
+PUBLIC int alloc_status(status **stat)
 {
 	*stat = malloc(sizeof(status));
 	if(*stat == NULL){
@@ -31,6 +31,6 @@ _PUBLIC int alloc_status(status **stat)
 	return SUCCESS;
 }
 
-_PUBLIC void free_status(status* stat){
+PUBLIC void free_status(status* stat){
 	free(stat);
 }

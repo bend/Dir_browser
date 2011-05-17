@@ -18,8 +18,8 @@
 #ifndef __GLOBAL_H__
 #define __GLOBAL_H__
 #define _PROTOTYPE( function,  params  )			function params 
-#define _PUBLIC
-#define _PRIVATE
+#define PUBLIC
+#define PRIVATE
 
 #define SUCCESS										0		/* Success code */
 #define FAILURE										-1		/* Failure code */
