@@ -37,6 +37,8 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 					if (browse_dir(buffer, rec_level+1, state) == FAILURE)
 						return FAILURE;
 				} else {
+					if (ent->d_type == DT_LNK)		/* don't follow simlink*/
+						return SUCCESS;
 					if (print_file(path, ent, rec_level,state) == FAILURE)
 						return FAILURE;
 					state->nb_files++;
