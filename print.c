@@ -78,7 +78,7 @@ PRIVATE int print_size(char* path, status* state)
 {
 	struct stat file_status;
 	char* size_conv;
-	if (stat(path, &file_status) >0) {
+	if (stat(path, &file_status) <0) {
 		perror("Stat failed");
 		return FAILURE;		
 	}
@@ -106,7 +106,7 @@ PRIVATE int print_mode(char* path, status *state)
 {
 	char* parsed_mode;
 	struct stat file_status;
-	if (stat(path, &file_status) >0) {
+	if (stat(path, &file_status) <0) {
 		perror("Stat failed");
 		return FAILURE;		
 	}

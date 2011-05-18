@@ -25,10 +25,10 @@ PUBLIC int alloc_options(options** opt)
 		perror("Malloc failed");
 		return FAILURE;
 	}
-	(*opt)->color = ON;			/* color is on by default */
-	(*opt)->hr = ON;			/* hr on by default */
+	(*opt)->color = OFF;		/* color is off by default */
+	(*opt)->hr = OFF;			/* hr off by default */
 	(*opt)->verbose = ON;		/* verbose on by defaut */
-	(*opt)->mode = ON;			/* mode is on by default */
+	(*opt)->mode = OFF;			/* mode is off by default */
 	(*opt)->level_ind = ON;		/* indent on by default */
 	(*opt)->depth = OFF;		/* no max_depth by default */
 	(*opt)->display = BOTH;		/* display all files by default */

@@ -58,8 +58,8 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 PUBLIC int start_browse(char* path, unsigned int rec_level, status *state)
 {
 	struct stat file_status;
-	if (stat(path, &file_status) >0) {
-		perror("Stat failed");
+	if (stat(path, &file_status) <0) {
+		perror("Error: ");
 		return FAILURE;		
 	}
 	/* Check if file or Folder */
@@ -67,6 +67,7 @@ PUBLIC int start_browse(char* path, unsigned int rec_level, status *state)
 		return browse_dir(path, rec_level, state); /* it's a folder */
 	}
 
+	
 	/* it's a file , so we print it */
 	if (state->opt->color == ON)
 		printf("%s%s ",BLUE, path);
