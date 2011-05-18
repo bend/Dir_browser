@@ -28,14 +28,15 @@
 PUBLIC int main(int argc, char** argv)
 {
 	if(argc>1){
-		status *stat;
-		if (alloc_status(&stat) == FAILURE)
+		status *state;
+		if (alloc_status(&state) == FAILURE)
 			return EXIT_FAILURE;
-		if (start_browse(argv[1], 0, stat) == FAILURE)
+		if (start_browse(argv[1], 0, state) == FAILURE)
 			return EXIT_FAILURE;
-		print_total(stat);
-		free(stat);
+		if (state->opt->d_total == ON)
+			print_total(state);
+		free(state);
 	}else printf("Please provide filename\n");
-	return 1;
+	return EXIT_SUCCESS;
 }
 

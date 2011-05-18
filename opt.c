@@ -33,7 +33,10 @@ PUBLIC int alloc_options(options** opt)
 	(*opt)->depth = OFF;		/* no max_depth by default */
 	(*opt)->display = BOTH;		/* display all files by default */
 	(*opt)->dir_sym = DIR_SYM; 	/* default symbol */
-	(*opt)->file_sym = FILE_SYM;/* default symblo */
+	(*opt)->file_sym = FILE_SYM;/* default symbol */
+	(*opt)->follow_link = OFF;	/* do not follow links */
+	(*opt)->d_hidden = OFF;		/* do not display hidden files/folders by default */
+	(*opt)->d_total = ON;		/* display grand total */
 	return SUCCESS;
 }
 

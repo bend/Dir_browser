@@ -49,8 +49,8 @@ PRIVATE int print_file(char * path, struct dirent *ent, unsigned int rec_level, 
 	char* abs_path;
 	if (state->opt->verbose == ON && state->opt->level_ind == ON 
 			&& state->opt->display != DIR_ONLY ) {
-	for (i=1; i<rec_level+1; i++)
-		printf("  ");
+		for (i=1; i<rec_level+1; i++)
+			printf("%s",TAB);
 	}
 
 	if (state->opt->verbose == ON && state->opt->display != DIR_ONLY) {
