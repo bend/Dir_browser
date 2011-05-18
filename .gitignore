@@ -2,4 +2,5 @@
 *.so
 .DS_STORE
 *.swp
+*.swo
 browsed
