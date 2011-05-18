@@ -1,4 +1,4 @@
-CFLAGS+=-Wall -Werror -ansi -pedantic 
+CFLAGS+=-Wall -Werror -ansi -pedantic -g
 LDFLAGS+=
 EXEC=browsed
 SOURCES=$(wildcard *.c)

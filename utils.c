@@ -32,8 +32,8 @@ PUBLIC int build_path(char* path, char* filename, char** res)
 
 PUBLIC int parse_mode(mode_t mode, char** parsed)
 {
-	char temp[] = {'-','-','-','-','-','-','-','-','-'};
-	*parsed = malloc(sizeof(char) * 9);
+	char temp[] = {'-','-','-','-','-','-','-','-','-','\0'};
+	*parsed = malloc(sizeof(char) * 10);
 	if (*parsed == NULL) {
 		perror("Malloc failed");
 		return FAILURE;
@@ -50,7 +50,7 @@ PUBLIC int parse_mode(mode_t mode, char** parsed)
 	if (mode & S_IROTH) temp[6] = 'r';
 	if (mode & S_IWOTH) temp[7] = 'w';
 	if (mode & S_IXOTH) temp[8] = 'x';
-	strncpy(*parsed, temp, 9);
+	strncpy(*parsed, temp, 10);
 	return SUCCESS;
 }	
 

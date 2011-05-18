@@ -27,7 +27,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 		while ((ent = readdir (dir)) != NULL) {
 			char* buffer;
 			if (build_path(path, ent->d_name, &buffer) == FAILURE)
-				return FAILURE;
+				continue;
 			if (!strcmp(ent->d_name,".") ==0 && !strcmp(ent->d_name, "..") == 0 	/* Check that it's not the current dir, parent dir */
 					&& (ent->d_name[0] != '.' || state->opt->d_hidden == ON)) {		/* And if it is hidden and we don't want to display it */
 				if (ent->d_type == DT_DIR ) {										/* Directory */
@@ -36,12 +36,12 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status *state)
 					if (state->opt->depth < rec_level)
 						return SUCCESS;												/* Max depth reached */
 					if (browse_dir(buffer, rec_level+1, state) == FAILURE)
-						return FAILURE;
+						continue;
 				} else {
 					if (ent->d_type == DT_LNK && state->opt->follow_link == OFF)	/* don't follow simlink*/
 						return SUCCESS;
 					if (print_file(path, ent, rec_level,state) == FAILURE)
-						return FAILURE;
+						continue;
 					state->nb_files++;
 				}
 			}
