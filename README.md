@@ -46,5 +46,5 @@ To install type
 	-d [depth] : maximum recursion  depth 
 	-D : no maximum recursion depth
 	-y [symbol] : represent file with symbol
-	-z [symblo] : represent folder with symbol
+	-z [symbol] : represent folder with symbol
 
