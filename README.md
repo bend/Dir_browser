@@ -27,4 +27,24 @@ To install type
 	browsed [options] filename
 
 #### Options:
+	-a : display hidden files
+	-A : hide hidden files
+	-c : color display
+	-C : no color
+	-h : human readable
+	-H : no human readable
+	-v : verbose
+	-V : no verbose
+	-m : mode display
+	-M : no mode display
+	-l : nested display
+	-L : no nested display
+	-f : follow links and non regular files
+	-F : do not follow links and non regular files
+	-t : total display
+	-T : no total display
+	-d [depth] : maximum recursion  depth 
+	-D : no maximum recursion depth
+	-y [symbol] : represent file with symbol
+	-z [symblo] : represent folder with symbol
 
