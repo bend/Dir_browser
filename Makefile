@@ -19,3 +19,6 @@ clean:
 
 mrproper:
 	@rm $(EXEC)
+
+install:
+	@cp $(EXEC) /bin
