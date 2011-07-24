@@ -3,7 +3,7 @@
  *
  *       Filename:  browsedir.h
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  03.05.2011 12:37:19

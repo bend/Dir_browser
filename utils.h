@@ -3,7 +3,7 @@
  *
  *       Filename:  utils.h
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  17.05.2011 17:02:41

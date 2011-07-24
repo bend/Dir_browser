@@ -31,19 +31,19 @@
 
 typedef struct options options;
 
-struct options{
-	char color;			/* display output in colors	*/
-	char hr;			/* display human readable size */
-	char verbose;		/* show browsed files */
-	char mode;			/* display mode */
-	char level_ind;		/* indent depth level */
-	int depth;			/* recursive depth */
-	char display;		/* Display only type of file can Be*/
-	char dir_sym; 		/* the dir symbol */
-	char file_sym;		/* the file symbol */
-	char follow_link;	/* follow links */
-	char d_hidden;		/* display hidden file if OFF, file will not be counted and size will not be part of total*/
-	char d_total;		/* display a grand total */
+struct options {
+    char color;			/* display output in colors	*/
+    char hr;			/* display human readable size */
+    char verbose;		/* show browsed files */
+    char mode;			/* display mode */
+    char level_ind;		/* indent depth level */
+    int depth;			/* recursive depth */
+    char display;		/* Display only type of file can Be*/
+    char dir_sym; 		/* the dir symbol */
+    char file_sym;		/* the file symbol */
+    char follow_link;	/* follow links */
+    char d_hidden;		/* display hidden file if OFF, file will not be counted and size will not be part of total*/
+    char d_total;		/* display a grand total */
 };
 
 

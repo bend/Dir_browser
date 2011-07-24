@@ -3,7 +3,7 @@
  *
  *       Filename:  global.h
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  04.05.2011 16:39:30
@@ -17,7 +17,7 @@
  */
 #ifndef __GLOBAL_H__
 #define __GLOBAL_H__
-#define _PROTOTYPE( function,  params  )			function params 
+#define _PROTOTYPE( function,  params  )			function params
 #define PUBLIC
 #define PRIVATE
 
@@ -25,7 +25,7 @@
 #define FAILURE										-1		/* Failure code */
 #define MAX_PATH									4096	/* Maximum length of the path */
 #define DIR_SYM										'+'		/* The directory symbol */
-#define FILE_SYM									'|'		/* The File symbol */
+#define FILE_SYM									'-'		/* The File symbol */
 #define TAB											"    "	/* The default tabultation */
 
 #endif

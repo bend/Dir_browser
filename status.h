@@ -3,7 +3,7 @@
  *
  *       Filename:  status.h
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  05.05.2011 12:23:55
@@ -26,11 +26,11 @@
 
 typedef struct status status;
 
-struct status{
-	unsigned long nb_files;
-	unsigned long nb_folders;
-	unsigned long size_byte;
-	options *opt;
+struct status {
+    unsigned long nb_files;
+    unsigned long nb_folders;
+    unsigned long size_byte;
+    options *opt;
 };
 
 _PROTOTYPE( int alloc_status, (status** stat)		);
