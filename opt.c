@@ -18,29 +18,29 @@
 
 #include "opt.h"
 
-PUBLIC int alloc_options(options** opt) 
-{
-	*opt = malloc(sizeof(options));
-	if (*opt == NULL) {
-		perror("Malloc failed");
-		return FAILURE;
-	}
-	(*opt)->color = OFF;		/* color is off by default */
-	(*opt)->hr = OFF;			/* hr off by default */
-	(*opt)->verbose = ON;		/* verbose on by defaut */
-	(*opt)->mode = OFF;			/* mode is off by default */
-	(*opt)->level_ind = ON;		/* indent on by default */
-	(*opt)->depth = OFF;		/* no max_depth by default */
-	(*opt)->display = BOTH;		/* display all files by default */
-	(*opt)->dir_sym = DIR_SYM; 	/* default symbol */
-	(*opt)->file_sym = FILE_SYM;/* default symbol */
-	(*opt)->follow_link = OFF;	/* do not follow links */
-	(*opt)->d_hidden = OFF;		/* do not display hidden files/folders by default */
-	(*opt)->d_total = ON;		/* display grand total */
-	return SUCCESS;
+PUBLIC int alloc_options(options** opt) {
+    *opt = malloc(sizeof(options));
+
+    if (*opt == NULL) {
+        perror("Malloc failed");
+        return FAILURE;
+    }
+
+    (*opt)->color = OFF;		/* color is off by default */
+    (*opt)->hr = OFF;			/* hr off by default */
+    (*opt)->verbose = ON;		/* verbose on by defaut */
+    (*opt)->mode = OFF;			/* mode is off by default */
+    (*opt)->level_ind = ON;		/* indent on by default */
+    (*opt)->depth = OFF;		/* no max_depth by default */
+    (*opt)->display = BOTH;		/* display all files by default */
+    (*opt)->dir_sym = DIR_SYM; 	/* default symbol */
+    (*opt)->file_sym = FILE_SYM;/* default symbol */
+    (*opt)->follow_link = OFF;	/* do not follow links */
+    (*opt)->d_hidden = OFF;		/* do not display hidden files/folders by default */
+    (*opt)->d_total = ON;		/* display grand total */
+    return SUCCESS;
 }
 
-PUBLIC void free_options(options* opt)
-{
-	free(opt);
+PUBLIC void free_options(options* opt) {
+    free(opt);
 }
