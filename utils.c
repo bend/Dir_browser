@@ -17,10 +17,12 @@
  */
 #include "utils.h"
 
-PUBLIC int build_path(char* path, char* filename, char** res) {
+PUBLIC int build_path(char* path, char* filename, char** res)
+{
     *res = malloc(sizeof(char) * MAX_PATH);
 
-    if(*res == NULL) {
+    if (*res == NULL)
+    {
         perror("Malloc failed");
         return FAILURE;
     }
@@ -31,11 +33,13 @@ PUBLIC int build_path(char* path, char* filename, char** res) {
     return SUCCESS;
 }
 
-PUBLIC int parse_mode(mode_t mode, char** parsed) {
+PUBLIC int parse_mode(mode_t mode, char** parsed)
+{
     char temp[] = {'-', '-', '-', '-', '-', '-', '-', '-', '-', '\0'};
     *parsed = malloc(sizeof(char) * 10);
 
-    if (*parsed == NULL) {
+    if (*parsed == NULL)
+    {
         perror("Malloc failed");
         return FAILURE;
     }
@@ -62,33 +66,48 @@ PUBLIC int parse_mode(mode_t mode, char** parsed) {
     return SUCCESS;
 }
 
-PUBLIC int size_convert(unsigned long size, char** converted) {
+PUBLIC int size_convert(unsigned long size, char** converted)
+{
     double conv_size;
     *converted = malloc(sizeof(char) * 256);
 
-    if (*converted == NULL) {
+    if (*converted == NULL)
+    {
         perror("Malloc failed");
         return FAILURE;
     }
 
     /* Check if is Tera */
-    if ((size / 1e12) > 1) {
+    if ((size / 1e12) > 1)
+    {
         conv_size = size / 1e12;
         gcvt(conv_size, 5, *converted);
         strncat(*converted, " TB", 3);
-    } else if ((size / 1e9) > 1) {
+    }
+
+    else if ((size / 1e9) > 1)
+    {
         conv_size = size / 1e9;
         gcvt(conv_size, 5, *converted);
         strncat(*converted, " GB", 3);
-    } else if (size / 1e6 > 1) {
+    }
+
+    else if (size / 1e6 > 1)
+    {
         conv_size = size / 1e6;
         gcvt(conv_size, 5, *converted);
         strncat(*converted, " MB", 3);
-    } else if (size / 1e3 > 1) {
+    }
+
+    else if (size / 1e3 > 1)
+    {
         conv_size = size / 1e3;
         gcvt(conv_size, 5, *converted);
         strncat(*converted, " KB", 3);
-    } else {
+    }
+
+    else
+    {
         conv_size = size;
         gcvt(conv_size, 5, *converted);
         strncat(*converted, " B", 3);

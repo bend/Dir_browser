@@ -26,11 +26,12 @@
 
 typedef struct status status;
 
-struct status {
+struct status
+{
     unsigned long nb_files;
     unsigned long nb_folders;
     unsigned long size_byte;
-    options *opt;
+    options* opt;
 };
 
 _PROTOTYPE( int alloc_status, (status** stat)		);

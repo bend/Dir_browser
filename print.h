@@ -32,10 +32,10 @@
 #include "utils.h"
 #include "opt.h"
 
-_PROTOTYPE( int print_dir, (char* path, struct dirent *ent, unsigned int rec_level, status* state )						);
-_PROTOTYPE( int print_file, (char* path, struct dirent *ent, unsigned int rec_level, status* state)						);
+_PROTOTYPE( int print_dir, (char* path, struct dirent* ent, unsigned int rec_level, status* state )						);
+_PROTOTYPE( int print_file, (char* path, struct dirent* ent, unsigned int rec_level, status* state)						);
 _PROTOTYPE( int print_size, (char* path, status* state)																	);
-_PROTOTYPE( int print_total, (status *state)																);
+_PROTOTYPE( int print_total, (status* state)																);
 
 _PROTOTYPE( int print_mode, (char* path, status* state )													);
 #endif

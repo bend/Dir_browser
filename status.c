@@ -18,10 +18,12 @@
 
 #include "status.h"
 
-PUBLIC int alloc_status(status **stat) {
+PUBLIC int alloc_status(status** stat)
+{
     *stat = malloc(sizeof(status));
 
-    if (*stat == NULL) {
+    if (*stat == NULL)
+    {
         perror("Malloc failed");
         return FAILURE;
     }
@@ -36,7 +38,8 @@ PUBLIC int alloc_status(status **stat) {
     return SUCCESS;
 }
 
-PUBLIC void free_status(status* stat) {
+PUBLIC void free_status(status* stat)
+{
     free_options(stat->opt);
     free(stat);
 }

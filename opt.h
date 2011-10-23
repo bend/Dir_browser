@@ -31,7 +31,8 @@
 
 typedef struct options options;
 
-struct options {
+struct options
+{
     char color;			/* display output in colors	*/
     char hr;			/* display human readable size */
     char verbose;		/* show browsed files */

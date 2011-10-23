@@ -18,10 +18,12 @@
 
 #include "opt.h"
 
-PUBLIC int alloc_options(options** opt) {
+PUBLIC int alloc_options(options** opt)
+{
     *opt = malloc(sizeof(options));
 
-    if (*opt == NULL) {
+    if (*opt == NULL)
+    {
         perror("Malloc failed");
         return FAILURE;
     }
@@ -41,6 +43,7 @@ PUBLIC int alloc_options(options** opt) {
     return SUCCESS;
 }
 
-PUBLIC void free_options(options* opt) {
+PUBLIC void free_options(options* opt)
+{
     free(opt);
 }
