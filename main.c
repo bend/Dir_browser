@@ -131,6 +131,7 @@ PUBLIC int main(int argc, char** argv)
 {
     status* state;
     char path[MAX_PATH];
+    int len = 0;
 
     if (alloc_status(&state) == FAILURE)
         return EXIT_FAILURE;
@@ -140,17 +141,22 @@ PUBLIC int main(int argc, char** argv)
 
     /* if no path provided take the current one */
     if (argc == 1)
+    {
         strncpy(path, ".\0", 2);
+        len = 1;
+    }
 
     /* check that the last arg is not an option */
     else
     {
         strncpy(path, argv[argc - 1], strlen(argv[argc - 1]));
+        len = strlen(argv[argc - 1]);
+        path[len ] = '\0';
 
         if (path[0] == '-')
             strncpy(path, ".\0", 2);
     }
-
+    
     if (start_browse(path, 0, state) == FAILURE)
         return EXIT_FAILURE;
 
