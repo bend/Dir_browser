@@ -66,9 +66,11 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     <p>
     To install DirBrowser you need cmake  2.6 or above
     create a build directory in the project folder
-    go to the directory and type
-    cmake ../
-    sudo make && make install
+    go to the directory and type<br/>
+    <pre>
+    <code>cmake ../</code>
+    <code>sudo make && make install</code>
+    </pre>
 	</p>
 	<h2>License</h2>
 	<p>GNU GPL V3</p>
@@ -92,16 +94,49 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 	<pre>$ git clone git://github.com/bend/Dir_browser</pre>
     </p>
     <h2>Usage</h2>
+    <div id="main-container">
+            <pre><code>browsed [options] filename</code></pre>
 
-	<h2>screenshots</h2>
-	<img src="./img/scr1.png" height=400/>
-	<img src="./img/scr2.png" height=400/>
-	<img src="./img/scr3.png" height=400/>
-	<div class="footer">
-		get the source code on GitHub : <a href="http://github.com/bend/Dir_browser">bend/Dir_browser</a>
-	</div>
+        <h2>Options:</h2>
 
-</div>
+<pre>
+<code>
+-a : display hidden files
+-A : hide hidden files
+-c : color display
+-C : no color
+-h : human readable
+-H : no human readable
+-v : verbose
+-V : no verbose
+-m : mode display
+-M : no mode display
+-l : nested display
+-L : no nested display
+-f : follow links and non regular files
+-F : do not follow links and non regular files
+-t : total display
+-T : no total display
+-d [depth] : maximum recursion  depth 
+-D : no maximum recursion depth
+-y [symbol] : represent file with symbol
+-z [symbol] : represent folder with symbol
+
+</code>
+</pre>
+        <div>
+        </body>
+    </html>
+
+        <h2>Screenshots</h2>
+        <img src="./img/scr1.png" height=400/>
+        <img src="./img/scr2.png" height=400/>
+        <img src="./img/scr3.png" height=400/>
+        <div class="footer">
+            get the source code on GitHub : <a href="http://github.com/bend/Dir_browser">bend/Dir_browser</a>
+        </div>
+
+    </div>
 
 
 </body>
