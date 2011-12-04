@@ -19,19 +19,66 @@
 #include "browsedir.h"
 
 
+PRIVATE struct dirent** preloadDir(char* path, int* size)
+{
+    DIR* dir;
+    struct dirent** dirsEnt;
+    int i = 0;
+    *size = 0;
+    /* First get Size */
+    if((dir = opendir(path)) == NULL)
+        return NULL;
+    while ( readdir(dir) != NULL)
+        ++(*size);
+    rewinddir(dir);
+    /* Put all the dirent in an array */
+    dirsEnt = malloc(*size*sizeof(struct dirent));
+    while(i < *size)
+    {
+        dirsEnt[i] = readdir(dir);
+        ++i;
+    }
+    printf("Nb subs : %d", *size);
+    return dirsEnt;
+}
+
 PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
 {
-    DIR* dir = opendir(path);
+    int size;
     struct dirent* ent;
-
-    if (dir != NULL)
+    DIR* dir;
+    struct dirent** dirsEnt;
+    int i = 0;
+    size = 0;
+    
+    /* First get Size */
+    if((dir = opendir(path)) == NULL){
+        perror("OpenDir failred: ");
+        return FAILURE;
+    }
+    while ( readdir(dir) != NULL)
+        ++size;
+    rewinddir(dir);
+    /* Put all the dirent in an array */
+    dirsEnt = malloc(size*sizeof(struct dirent));
+    while(i < size)
     {
-        while ((ent = readdir (dir)) != NULL)
+        dirsEnt[i] = readdir(dir);
+        ++i;
+    }
+    
+    if(dirsEnt != NULL && *dirsEnt != NULL)
+    {
+        i = 0;
+        while (i< size)
         {
             char* buffer;
+            ent = dirsEnt[i];
+            printf("ent->dname : %s\n", ent->d_name);
 
             if (build_path(path, ent->d_name, &buffer) == FAILURE)
                 continue;
+            printf("NEw path : %s", path);
 
             if (!strcmp(ent->d_name, ".") == 0 && !strcmp(ent->d_name, "..") == 0 	/* Check that it's not the current dir, parent dir */
                     && (ent->d_name[0] != '.' || state->opt->d_hidden == ON))  		/* And if it is hidden and we don't want to display it */
@@ -42,7 +89,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
                     state->nb_folders++;
 
                     if (state->opt->depth < rec_level)
-                        return SUCCESS;												/* Max depth reached */
+                        return SUCCESS;	 /* Max depth reached */
 
                     if (browse_dir(buffer, rec_level + 1, state) == FAILURE)
                         continue;
@@ -61,16 +108,10 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
             }
 
             free(buffer);
+            ++i;
         }
     }
 
-    else
-    {
-        perror ("browsed: ");
-        return FAILURE;
-    }
-
-    closedir(dir);
     return SUCCESS;
 }
 
