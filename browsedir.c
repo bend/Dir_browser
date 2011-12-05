@@ -19,10 +19,10 @@
 #include "browsedir.h"
 
 
-PRIVATE struct dirent** preloadDir(char* path, int* size)
+PRIVATE struct dirent* preloadDir(char* path, int* size)
 {
     DIR* dir;
-    struct dirent** dirsEnt;
+    struct dirent* dirsEnt;
     int i = 0;
     *size = 0;
     /* First get Size */
@@ -35,50 +35,32 @@ PRIVATE struct dirent** preloadDir(char* path, int* size)
     dirsEnt = malloc(*size*sizeof(struct dirent));
     while(i < *size)
     {
-        dirsEnt[i] = readdir(dir);
+        dirsEnt[i] = *readdir(dir);
         ++i;
     }
-    printf("Nb subs : %d", *size);
+    closedir(dir);
     return dirsEnt;
 }
 
 PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
 {
-    int size;
+    int *size = malloc(sizeof(int));
+    int i;
     struct dirent* ent;
-    DIR* dir;
-    struct dirent** dirsEnt;
-    int i = 0;
-    size = 0;
+    struct dirent* dirsEnt;
+    dirsEnt = preloadDir(path, size);
+
     
-    /* First get Size */
-    if((dir = opendir(path)) == NULL){
-        perror("OpenDir failred: ");
-        return FAILURE;
-    }
-    while ( readdir(dir) != NULL)
-        ++size;
-    rewinddir(dir);
-    /* Put all the dirent in an array */
-    dirsEnt = malloc(size*sizeof(struct dirent));
-    while(i < size)
-    {
-        dirsEnt[i] = readdir(dir);
-        ++i;
-    }
-    
-    if(dirsEnt != NULL && *dirsEnt != NULL)
+    if(dirsEnt != NULL )
     {
         i = 0;
-        while (i< size)
+        while (i< *size)
         {
             char* buffer;
-            ent = dirsEnt[i];
-            printf("ent->dname : %s\n", ent->d_name);
+            ent = &dirsEnt[i];
 
             if (build_path(path, ent->d_name, &buffer) == FAILURE)
                 continue;
-            printf("NEw path : %s", path);
 
             if (!strcmp(ent->d_name, ".") == 0 && !strcmp(ent->d_name, "..") == 0 	/* Check that it's not the current dir, parent dir */
                     && (ent->d_name[0] != '.' || state->opt->d_hidden == ON))  		/* And if it is hidden and we don't want to display it */
@@ -111,6 +93,8 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
             ++i;
         }
     }
+    free(size);
+    free(dirsEnt);
 
     return SUCCESS;
 }
