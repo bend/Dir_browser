@@ -19,10 +19,10 @@
 #include "browsedir.h"
 
 
-PRIVATE struct dirent* preloadDir(char* path, int* size)
+PRIVATE struct dirent* preload_dir(char* path, int* size)
 {
     DIR* dir;
-    struct dirent* dirsEnt;
+    struct dirent* dirs_ent;
     int i = 0;
     *size = 0;
     /* First get Size */
@@ -32,14 +32,18 @@ PRIVATE struct dirent* preloadDir(char* path, int* size)
         ++(*size);
     rewinddir(dir);
     /* Put all the dirent in an array */
-    dirsEnt = malloc(*size*sizeof(struct dirent));
+    dirs_ent = malloc(*size*sizeof(struct dirent));
+    if(dirs_ent == NULL){
+        perror("Malloc failed");
+        return NULL;
+    }
     while(i < *size)
     {
-        dirsEnt[i] = *readdir(dir);
+        dirs_ent[i] = *readdir(dir);
         ++i;
     }
     closedir(dir);
-    return dirsEnt;
+    return dirs_ent;
 }
 
 PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
@@ -47,17 +51,16 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
     int *size = malloc(sizeof(int));
     int i;
     struct dirent* ent;
-    struct dirent* dirsEnt;
-    dirsEnt = preloadDir(path, size);
+    struct dirent* dirs_ent;
+    dirs_ent = preload_dir(path, size);
 
-    
-    if(dirsEnt != NULL )
+    if(dirs_ent != NULL )
     {
         i = 0;
         while (i< *size)
         {
             char* buffer;
-            ent = &dirsEnt[i];
+            ent = &dirs_ent[i];
 
             if (build_path(path, ent->d_name, &buffer) == FAILURE)
                 continue;
@@ -65,7 +68,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
             if (!strcmp(ent->d_name, ".") == 0 && !strcmp(ent->d_name, "..") == 0 	/* Check that it's not the current dir, parent dir */
                     && (ent->d_name[0] != '.' || state->opt->d_hidden == ON))  		/* And if it is hidden and we don't want to display it */
             {
-                if (ent->d_type == DT_DIR )  										/* Directory */
+                if (ent->d_type == DT_DIR) /* Directory */
                 {
                     print_dir(path, ent, rec_level, state);
                     state->nb_folders++;
@@ -82,9 +85,11 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
                     if (ent->d_type == DT_LNK && state->opt->follow_link == OFF)	/* don't follow simlink*/
                         return SUCCESS;
 
-                    if (print_file(path, ent, rec_level, state) == FAILURE)
+                    if (print_file(path, ent, rec_level, state) == FAILURE){
+                        ++i;
+                        free(buffer);
                         continue;
-
+                    }
                     state->nb_files++;
                 }
             }
@@ -94,7 +99,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
         }
     }
     free(size);
-    free(dirsEnt);
+    free(dirs_ent);
 
     return SUCCESS;
 }

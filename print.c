@@ -102,7 +102,7 @@ PRIVATE int print_size(char* path, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        perror("Stat failed");
+        perror("Stat failed: ");
         return FAILURE;
     }
 
