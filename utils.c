@@ -26,9 +26,9 @@ PUBLIC int build_path(char* path, char* filename, char** res)
         perror("Malloc failed");
         return FAILURE;
     }
-
     strcpy(*res, path);
-    strcat(*res, "/");
+    if(strlen((path) != 1 || path[0] != '/')
+        strcat(*res, "/");
     strcat(*res, filename);
     return SUCCESS;
 }
