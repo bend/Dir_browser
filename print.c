@@ -21,6 +21,7 @@
 PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, status* state)
 {
     int i;
+    char* abs_path;
 
     if (state->opt->display == FILE_ONLY || state->opt->verbose == OFF)
         return SUCCESS;			/* No display on directories */
@@ -29,6 +30,29 @@ PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, st
     {
         for (i = 0; i < rec_level; i++)
             printf(TAB);
+    } else {
+        if (build_path(path, ent->d_name, &abs_path) == FAILURE)
+            return FAILURE;
+
+        if (state->opt->color == ON) 	/* Color on */
+            printf("%s%s ", RED, abs_path);
+
+        else							/* Color off */
+            printf("%s%s ", NONE, abs_path);
+
+        if (state->opt->mode == ON)  	/* Mode on */
+        {
+            if (build_path(path, ent->d_name, &abs_path) == FAILURE)
+                return FAILURE;
+
+            if (print_mode(abs_path, state) == FAILURE)
+                return FAILURE;
+            printf("\n");
+        }
+
+        else printf("\n");
+        free(abs_path);
+        return SUCCESS;
     }
 
     if (state->opt->color == ON) 	/* Color on */
@@ -39,8 +63,6 @@ PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, st
 
     if (state->opt->mode == ON)  	/* Mode on */
     {
-        char* abs_path;
-
         if (build_path(path, ent->d_name, &abs_path) == FAILURE)
             return FAILURE;
 
@@ -66,6 +88,35 @@ PRIVATE int print_file(char* path, struct dirent* ent, unsigned int rec_level, s
     {
         for (i = 1; i < rec_level + 1; i++)
             printf("%s", TAB);
+    } else {
+
+        if (build_path(path, ent->d_name, &abs_path) == FAILURE)
+            return FAILURE;
+        
+        if (state->opt->verbose == ON && state->opt->display != DIR_ONLY)
+        {
+            if (state->opt->color == ON)
+                printf("%s%s ", BLUE, abs_path);
+
+            else
+                printf("%s%s ", NONE, abs_path);
+        }
+
+
+        if (state->opt->mode == ON && state->opt->display != DIR_ONLY &&
+                state->opt->verbose == ON)
+        {
+            if (print_mode(abs_path, state) == FAILURE)
+                return FAILURE;
+        }
+
+        if (print_size(abs_path, state) == FAILURE)
+            return FAILURE;
+
+        free(abs_path);
+        return SUCCESS;
+
+
     }
 
     if (state->opt->verbose == ON && state->opt->display != DIR_ONLY)

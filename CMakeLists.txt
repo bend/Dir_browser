@@ -8,25 +8,26 @@ SET(CMAKE_BUILD_TYPE Release)
 
 ADD_DEFINITIONS(
     -Wall
-    -Werror
-    -ansi 
-    -pedantic
-    )
-FILE(GLOB SOURCE *.c)
+    - Werror
+    - ansi
+    - pedantic
+)
+FILE(GLOB SOURCE* .c)
 
-FILE(GLOB HEADERS *.h)
+FILE(GLOB HEADERS* .h)
 
 IF(WIN32)
-    MESSAGE(SEND_ERROR "This program is not compatible with Window")
-    return()
-ENDIF()
+MESSAGE(SEND_ERROR "This program is not compatible with Window")
+return()
+      ENDIF()
 
 # Compiler flags
-if(CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_C_FLAGS "-O2")        ## Optimize
-endif()
 
-ADD_EXECUTABLE(${EXECUTABLE_NAME} ${SOURCE})
+      if (CMAKE_COMPILER_IS_GNUC)
+          set(CMAKE_C_FLAGS "-O2")        ## Optimize
+          endif()
+
+          ADD_EXECUTABLE($ {EXECUTABLE_NAME} $ {SOURCE})
 
 #Install
-INSTALL(TARGETS ${EXECUTABLE_NAME} DESTINATION bin)
+          INSTALL(TARGETS $ {EXECUTABLE_NAME} DESTINATION bin)
