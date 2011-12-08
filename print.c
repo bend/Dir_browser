@@ -35,7 +35,7 @@ PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, st
         printf("%s%c %s ", RED, state->opt->dir_sym, ent->d_name);
 
     else							/* Color off */
-        printf("%s%c %s ", DEFAULT, state->opt->dir_sym, ent->d_name);
+        printf("%s%c %s ", NONE, state->opt->dir_sym, ent->d_name);
 
     if (state->opt->mode == ON)  	/* Mode on */
     {
@@ -74,7 +74,7 @@ PRIVATE int print_file(char* path, struct dirent* ent, unsigned int rec_level, s
             printf("%s%c %s ", BLUE, state->opt->file_sym, ent->d_name);
 
         else
-            printf("%s%c %s ", DEFAULT, state->opt->file_sym, ent->d_name);
+            printf("%s%c %s ", NONE, state->opt->file_sym, ent->d_name);
     }
 
     if (build_path(path, ent->d_name, &abs_path) == FAILURE)
@@ -120,7 +120,7 @@ PRIVATE int print_size(char* path, status* state)
             printf("%s- %s\n", YELLOW, size_conv);
 
         else
-            printf("%s- %s\n", DEFAULT, size_conv);
+            printf("%s- %s\n", NONE, size_conv);
 
         free(size_conv);
     }
@@ -131,7 +131,7 @@ PRIVATE int print_size(char* path, status* state)
             printf("%s- %ld\n", YELLOW, (long)file_status.st_size);
 
         else
-            printf("%s- %ld\n", DEFAULT, (long)file_status.st_size);
+            printf("%s- %ld\n", NONE, (long)file_status.st_size);
     }
 
     return SUCCESS;
@@ -158,7 +158,7 @@ PRIVATE int print_mode(char* path, status* state)
         printf("%s[ %s ] ", GREEN, parsed_mode);
 
     else
-        printf("%s[ %s ] ", DEFAULT, parsed_mode);
+        printf("%s[ %s ] ", NONE, parsed_mode);
 
     free(parsed_mode);
     return SUCCESS;
@@ -177,7 +177,7 @@ PRIVATE int print_total(status* state)
     }
 
     else
-        printf("%s\nTotal:\n\t%ld Files\n\t%ld Folders\nSize:\t%ld\n", DEFAULT, state->nb_files, state->nb_folders, state->size_byte);
+        printf("%s\nTotal:\n\t%ld Files\n\t%ld Folders\nSize:\t%ld\n", NONE, state->nb_files, state->nb_folders, state->size_byte);
 
     return SUCCESS;
 }
