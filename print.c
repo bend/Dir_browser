@@ -1,5 +1,30 @@
 /*
- * =====================================================================================
+ i
+PRIVATE void print_help(){
+printf("Usage : browsed [options] path\n");
+printf("Options :\n");
+printf("-a : Display hidden files\n");
+printf("-A : Hide hidden files\n");
+printf("-c : Color display\n");
+printf("-C : No color\n");
+printf("-h : Human readable\n");
+printf("-H : No human readable\n");
+printf("-v : Verbose\n");
+printf("-V : No verbose\n");
+printf("-m : Mode display\n");
+printf("-M : No mode display\n");
+printf("-l : Nested display\n");
+printf("-L : No nested display\n");
+printf("-f : Follow links and non regular files\n");
+printf("-F : Do not follow links and non regular files\n");
+printf("-t : Total display\n");
+printf("-T : No total display\n");
+printf("-d depth : Maximum recursion  depth \n");
+printf("-D : No maximum recursion depth\n");
+printf("-y symbol : Represent file with symbol\n");
+printf("-z symbol : Represent folder with symbol\n");
+
+} =====================================================================================
  *
  *       Filename:  print.c
  *
@@ -161,6 +186,10 @@ PRIVATE int print_size(char* path, status* state)
 
     if (state->opt->verbose == OFF || state->opt->display == DIR_ONLY)
         return SUCCESS;
+    if (state->opt->d_size == OFF){
+        printf("\n");
+        return SUCCESS;
+    }
 
     if (state->opt->hr == ON)
     {

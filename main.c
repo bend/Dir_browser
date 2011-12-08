@@ -27,12 +27,39 @@
 #include "global.h"
 #include "opt.h"
 
+PRIVATE void print_help(){
+    printf("Usage : browsed [options] path\n");
+    printf("Options :\n");
+    printf("-a : Display hidden files\n");
+    printf("-A : Hide hidden files\n");
+    printf("-c : Color display\n");
+    printf("-C : No color\n");
+    printf("-h : Human readable\n");
+    printf("-H : No human readable\n");
+    printf("-v : Verbose\n");
+    printf("-V : No verbose\n");
+    printf("-m : Mode display\n");
+    printf("-M : No mode display\n");
+    printf("-l : Nested display\n");
+    printf("-L : No nested display\n");
+    printf("-f : Follow links and non regular files\n");
+    printf("-F : Do not follow links and non regular files\n");
+    printf("-t : Total display\n");
+    printf("-T : No total display\n");
+    printf("-d depth : Maximum recursion  depth \n");
+    printf("-D : No maximum recursion depth\n");
+    printf("-y symbol : Represent file with symbol\n");
+    printf("-z symbol : Represent folder with symbol\n");
+    printf("-s : Display size for each file\n");
+    printf("-S : Hide size for each file\n");
+
+}
 
 PRIVATE int parse_opt(int argc, char** argv, status* state)
 {
     int c;
 
-    while ((c = getopt (argc, argv, "aAcChHvVmMlLfFtTd:Dy:z:")) != -1)    /*Parse arguments*/
+    while ((c = getopt (argc, argv, "sSaAcChHvVmMlLfFtTd:Dy:z:")) != -1)    /*Parse arguments*/
     {
         switch (c)
         {
@@ -42,6 +69,10 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
 
             case 'c':		/* display with colors */
                 state->opt->color = ON;
+                break;
+
+            case 's':       /* display size for each file */
+                state->opt->d_size = ON;
                 break;
 
             case 'h':		/* human readable */
@@ -88,6 +119,10 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
                 state->opt->color = OFF;
                 break;
 
+            case 'S':       /* hide size for each file */
+                state->opt->d_size = OFF;
+                break;
+
             case 'H':		/* human readable */
                 state->opt->hr = OFF;
                 break;
@@ -117,7 +152,7 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
                 break;
 
             default:
-                printf("browsed [aAdDcChHlLmMfFtTDd: y: z: ] [path]\n");
+                print_help();
                 return FAILURE;
                 break;
         }
@@ -125,6 +160,7 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
 
     return SUCCESS;
 }
+
 
 
 PUBLIC int main(int argc, char** argv)

@@ -40,6 +40,7 @@ PUBLIC int alloc_options(options** opt)
     (*opt)->follow_link = OFF;	/* do not follow links */
     (*opt)->d_hidden = OFF;		/* do not display hidden files/folders by default */
     (*opt)->d_total = ON;		/* display grand total */
+    (*opt)->d_size = ON;        /* display the size of each file */
     return SUCCESS;
 }
 

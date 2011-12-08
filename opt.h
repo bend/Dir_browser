@@ -45,6 +45,7 @@ struct options
     char follow_link;	/* follow links */
     char d_hidden;		/* display hidden file if OFF, file will not be counted and size will not be part of total*/
     char d_total;		/* display a grand total */
+    char d_size;        /* display size for each file*/
 };
 
 
