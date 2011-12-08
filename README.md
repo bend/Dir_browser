@@ -17,14 +17,21 @@ DirBrowser has many features
 
 ### Installation
 
-To install type
+#### Using make
 
 	make
 	sudo make install
 
+#### Using cmake (recommended)
+    
+    mkdir build&&cd build
+    cmake ../
+    make
+    sudo make install
+
 ### Usage
 
-	browsed [options] filename
+	browsed [options] path
 
 #### Options:
 	-a : display hidden files
@@ -43,8 +50,10 @@ To install type
 	-F : do not follow links and non regular files
 	-t : total display
 	-T : no total display
-	-d [depth] : maximum recursion  depth 
+	-d depth : maximum recursion  depth 
 	-D : no maximum recursion depth
-	-y [symbol] : represent file with symbol
-	-z [symbol] : represent folder with symbol
+	-y symbol : represent file with symbol
+	-z symbol : represent folder with symbol
+    -s : display size for each file
+    -S : hide size for each file
 
