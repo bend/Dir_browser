@@ -153,7 +153,7 @@ PRIVATE int print_size(char* path, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        perror("Stat failed: ");
+        fprintf(stderr,"Stat failed: %s\n", path);
         return FAILURE;
     }
 
@@ -195,13 +195,12 @@ PRIVATE int print_mode(char* path, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        perror("Stat failed");
+        fprintf(stderr,"Stat failed: %s\n", path);
         return FAILURE;
     }
 
     if (parse_mode(file_status.st_mode, &parsed_mode) == FAILURE)
     {
-        perror("Parse mode failed");
         return FAILURE;
     }
 

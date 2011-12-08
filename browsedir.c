@@ -110,7 +110,7 @@ PUBLIC int start_browse(char* path, unsigned int rec_level, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        perror("Error: ");
+        fprintf(stderr, "Stat failed: %s\n", path);
         return FAILURE;
     }
 
