@@ -16,6 +16,8 @@
  * =====================================================================================
  */
 
+#define VERSION "v0.3.4"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
@@ -53,10 +55,19 @@ PRIVATE void usage(){
     printf("-S | --no-size\t\t\t: Hide size for each file\n");
 }
 
+PRIVATE void version(){
+    printf("browsed %s\n",VERSION);
+    printf("http://bend.github.com/Dir_browser\n");
+    printf("Author : Ben D.\n");
+    printf("dbapps2@gmail.com\n");
+    printf("Licensed under  GNU GENERAL PUBLIC LICENSE Version 3\n");
+}
+
 PRIVATE int parse_opt(int argc, char** argv, status* state)
 {
     int c;
     static struct option long_options[] = {
+        {"version", no_argument, NULL, 0},
         {"help", no_argument, NULL, 1},
         {"hidden", no_argument, NULL, 'a'},
         {"color", no_argument, NULL, 'c'},
@@ -86,6 +97,10 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
     {
         switch (c)
         {
+            case 0:
+                version();
+                exit(0);
+                break;
             case 1:
                 usage();
                 exit(0);
