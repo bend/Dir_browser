@@ -34,25 +34,26 @@ DirBrowser has many features
 	browsed [options] path
 
 #### Options:
-     --help                 : Display help
--a | --hidden               : Display hidden files
--A | --no-hidden            : Hide hidden files
--c | --color                : Color display
--C | --no-color             : No color
--h | --human-readable       : Human readable
--v | --verbose              : Verbose
--V | --no-verbose           : No verbose
--m | --mode                 : Mode display
--M | --no-mode              : No mode display
--l | --list                 : Nested display
--L | --tree                 : No nested display
--f | --follow-links         : Follow links and non regular files
--F | --no-follow-links      : Do not follow links and non regular files
--t | --total                : Total display
--T | --no-total             : No total display
--d | --depth depth          : Maximum recursion  depth 
--y | --file-symbol symbol   : Represent file with symbol
--z | --folder-symbol symbol : Represent folder with symbol
--s | --size                 : Display size for each file
--S | --no-size              : Hide size for each file
+
+         --help                 : Display help
+    -a | --hidden               : Display hidden files
+    -A | --no-hidden            : Hide hidden files
+    -c | --color                : Color display
+    -C | --no-color             : No color
+    -h | --human-readable       : Human readable
+    -v | --verbose              : Verbose
+    -V | --no-verbose           : No verbose
+    -m | --mode                 : Mode display
+    -M | --no-mode              : No mode display
+    -l | --list                 : Nested display
+    -L | --tree                 : No nested display
+    -f | --follow-links         : Follow links and non regular files
+    -F | --no-follow-links      : Do not follow links and non regular files
+    -t | --total                : Total display
+    -T | --no-total             : No total display
+    -d | --depth depth          : Maximum recursion  depth 
+    -y | --file-symbol symbol   : Represent file with symbol
+    -z | --folder-symbol symbol : Represent folder with symbol
+    -s | --size                 : Display size for each file
+    -S | --no-size              : Hide size for each file
 
