@@ -30,29 +30,27 @@
 PRIVATE void usage(){
     printf("Usage : browsed [options] path\n");
     printf("Options :\n");
-    printf("-a : Display hidden files\n");
-    printf("-A : Hide hidden files\n");
-    printf("-c : Color display\n");
-    printf("-C : No color\n");
-    printf("-h : Human readable\n");
-    printf("-H : No human readable\n");
-    printf("-v : Verbose\n");
-    printf("-V : No verbose\n");
-    printf("-m : Mode display\n");
-    printf("-M : No mode display\n");
-    printf("-l : Nested display\n");
-    printf("-L : No nested display\n");
-    printf("-f : Follow links and non regular files\n");
-    printf("-F : Do not follow links and non regular files\n");
-    printf("-t : Total display\n");
-    printf("-T : No total display\n");
-    printf("-d depth : Maximum recursion  depth \n");
-    printf("-D : No maximum recursion depth\n");
-    printf("-y symbol : Represent file with symbol\n");
-    printf("-z symbol : Represent folder with symbol\n");
-    printf("-s : Display size for each file\n");
-    printf("-S : Hide size for each file\n");
-
+    printf("   | --help\t\t\t: Display this help\n");
+    printf("-a | --hidden\t\t\t: Display hidden files\n");
+    printf("-A | --no-hidden\t\t: Hide hidden files\n");
+    printf("-c | --color\t\t\t: Color display\n");
+    printf("-C | --no-color\t\t\t: No color\n");
+    printf("-h | --human-readable\t\t: Human readable\n");
+    printf("-v | --verbose\t\t\t: Verbose\n");
+    printf("-V | --no-verbose\t\t: No verbose\n");
+    printf("-m | --mode\t\t\t: Mode display\n");
+    printf("-M | --no-mode\t\t\t: No mode display\n");
+    printf("-l | --list\t\t\t: Nested display\n");
+    printf("-L | --tree\t\t\t: No nested display\n");
+    printf("-f | --follow-links\t\t: Follow links and non regular files\n");
+    printf("-F | --no-follow-links\t\t: Do not follow links and non regular files\n");
+    printf("-t | --total\t\t\t: Total display\n");
+    printf("-T | --no-total\t\t\t: No total display\n");
+    printf("-d | --depth depth\t\t: Maximum recursion  depth \n");
+    printf("-y | --file-symbol symbol\t: Represent file with symbol\n");
+    printf("-z | --folder-symbol symbol\t: Represent folder with symbol\n");
+    printf("-s | --size \t\t\t: Display size for each file\n");
+    printf("-S | --no-size\t\t\t: Hide size for each file\n");
 }
 
 PRIVATE int parse_opt(int argc, char** argv, status* state)
@@ -80,7 +78,6 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
         {"list", no_argument, NULL, 'L'},
         {"no-follow-links", no_argument, NULL, 'F'},
         {"no-total", no_argument, NULL, 'T'},
-        {"no-max-depth", no_argument, NULL, 'D'},
         {NULL, 0, NULL, 0}
     };
     int option_index = 0;
