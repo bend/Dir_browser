@@ -27,7 +27,7 @@
 #include "global.h"
 #include "opt.h"
 
-PRIVATE void print_help(){
+PRIVATE void usage(){
     printf("Usage : browsed [options] path\n");
     printf("Options :\n");
     printf("-a : Display hidden files\n");
@@ -58,11 +58,41 @@ PRIVATE void print_help(){
 PRIVATE int parse_opt(int argc, char** argv, status* state)
 {
     int c;
-
-    while ((c = getopt (argc, argv, "sSaAcChHvVmMlLfFtTd:Dy:z:")) != -1)    /*Parse arguments*/
+    static struct option long_options[] = {
+        {"help", no_argument, NULL, 1},
+        {"hidden", no_argument, NULL, 'a'},
+        {"color", no_argument, NULL, 'c'},
+        {"size", no_argument, NULL, 's'},
+        {"human-readable", no_argument, NULL, 'h'},
+        {"verbose", no_argument, NULL, 'v'},
+        {"mode", no_argument, NULL, 'm'},
+        {"tree", no_argument, NULL, 'l'},
+        {"follow-links", no_argument, NULL, 'f'},
+        {"total", no_argument, NULL, 't'},
+        {"depth", required_argument, NULL, 'd'},
+        {"file-symbol", required_argument, NULL, 'y'},
+        {"folder-symbol", required_argument, NULL, 'z'},
+        {"no-hidden", no_argument, NULL, 'A'},
+        {"no-color", no_argument, NULL, 'C'},
+        {"no-size", no_argument, NULL, 'S'},
+        {"no-verbose", no_argument, NULL, 'V'},
+        {"no-mode", no_argument, NULL, 'M'},
+        {"list", no_argument, NULL, 'L'},
+        {"no-follow-links", no_argument, NULL, 'F'},
+        {"no-total", no_argument, NULL, 'T'},
+        {"no-max-depth", no_argument, NULL, 'D'},
+        {NULL, 0, NULL, 0}
+    };
+    int option_index = 0;
+    
+    while ((c = getopt_long (argc, argv, "sSaAcChHvVmMlLfFtTd:Dy:z:0", long_options, &option_index)) != -1)    /*Parse arguments*/
     {
         switch (c)
         {
+            case 1:
+                usage();
+                exit(0);
+                break;
             case 'a':		/* show hidden files/folders */
                 state->opt->d_hidden = ON;
                 break;
@@ -152,7 +182,7 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
                 break;
 
             default:
-                print_help();
+                usage();
                 return FAILURE;
                 break;
         }
