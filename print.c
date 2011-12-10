@@ -1,47 +1,48 @@
+
 /*
- i
-PRIVATE void print_help(){
-printf("Usage : browsed [options] path\n");
-printf("Options :\n");
-printf("-a : Display hidden files\n");
-printf("-A : Hide hidden files\n");
-printf("-c : Color display\n");
-printf("-C : No color\n");
-printf("-h : Human readable\n");
-printf("-H : No human readable\n");
-printf("-v : Verbose\n");
-printf("-V : No verbose\n");
-printf("-m : Mode display\n");
-printf("-M : No mode display\n");
-printf("-l : Nested display\n");
-printf("-L : No nested display\n");
-printf("-f : Follow links and non regular files\n");
-printf("-F : Do not follow links and non regular files\n");
-printf("-t : Total display\n");
-printf("-T : No total display\n");
-printf("-d depth : Maximum recursion  depth \n");
-printf("-D : No maximum recursion depth\n");
-printf("-y symbol : Represent file with symbol\n");
-printf("-z symbol : Represent folder with symbol\n");
-
-} =====================================================================================
+ *   Copyright © Ben D.
+ *   dbapps2@gmail.com
  *
- *       Filename:  print.c
+ *   This is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
  *
- *    Description:  prints the dir or file on screen
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
  *
- *        Version:  1.0
- *        Created:  05.05.2011 11:01:13
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  Ben D. (BD), dbapps2@gmail.com
- *        Company:  dbapps
- *
- * =====================================================================================
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #include "print.h"
+
+PRIVATE void print_help(){
+    printf("Usage : browsed [options] path\n");
+    printf("Options :\n");
+    printf("-a : Display hidden files\n");
+    printf("-A : Hide hidden files\n");
+    printf("-c : Color display\n");
+    printf("-C : No color\n");
+    printf("-h : Human readable\n");
+    printf("-H : No human readable\n");
+    printf("-v : Verbose\n");
+    printf("-V : No verbose\n");
+    printf("-m : Mode display\n");
+    printf("-M : No mode display\n");
+    printf("-l : Nested display\n");
+    printf("-L : No nested display\n");
+    printf("-f : Follow links and non regular files\n");
+    printf("-F : Do not follow links and non regular files\n");
+    printf("-t : Total display\n");
+    printf("-T : No total display\n");
+    printf("-d depth : Maximum recursion  depth \n");
+    printf("-D : No maximum recursion depth\n");
+    printf("-y symbol : Represent file with symbol\n");
+    printf("-z symbol : Represent folder with symbol\n");
+}
+
 
 PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, status* state)
 {

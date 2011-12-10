@@ -1,4 +1,3 @@
-
 /*
  *   Copyright © Ben D.
  *   dbapps2@gmail.com
@@ -17,22 +16,19 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "executor.h"
 
-
-int main( int argc, char *argv[] )
+PUBLIC int execute_command(char* command)
 {
 
   FILE *fp;
-  int status;
   char path[1035];
 
   /* Open the command for reading. */
-  fp = popen("vim /Users/benoitdaccache/Desktop/test.c ", "r");
+  fp = popen(command, "r");
   if (fp == NULL) {
     printf("Failed to run command\n" );
-    exit;
+    return FAILURE;
   }
 
   /* Read the output a line at a time - output it. */
@@ -43,5 +39,5 @@ int main( int argc, char *argv[] )
   /* close */
   pclose(fp);
 
-  return 0;
+  return SUCCESS;
 }
