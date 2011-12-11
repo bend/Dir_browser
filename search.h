@@ -19,5 +19,21 @@
 
 #ifndef __SEARCH_H__
 #define __SEARCH_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include "global.h"
+
+typedef struct search_pattern search_pattern;
+
+struct search_pattern
+{
+    bool is_suffix;
+    bool is_prefix;
+    char* pattern;
+};
+
+_PROTOTYPE(bool is_searched, (search_pattern* pattern, char* filename));
 
 #endif

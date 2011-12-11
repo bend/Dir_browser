@@ -19,6 +19,33 @@
 
 #include "search.h"
 
-void todo(){
-    return;
+
+int search_pattern_alloc(search_pattern** sp, char* pattern)
+{
+    *sp = malloc(sizeof(search_pattern));
+    if(*sp == NULL)
+        return FAILURE;
+    if(pattern[0] == '*')
+        (*sp)->is_suffix = true;
+    else (*sp)->is_suffix = false;
+    if(pattern[strlen(pattern) -1 ] == '*')
+        (*sp)->is_prefix = true;
+    else (*sp)->is_prefix = false;
+
+    return SUCCESS;
+
 }
+
+
+void search_pattern_free(search_pattern *sp)
+{
+    free(sp->pattern);
+    free(sp);
+}
+
+bool is_searched(search_pattern* pattern, char* filename)
+{
+
+    return false;
+}
+
