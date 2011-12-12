@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 PROJECT(DIR_BROWSER)
 
@@ -18,12 +18,12 @@ FILE(GLOB HEADERS *.h)
 
 IF(WIN32)
     MESSAGE(SEND_ERROR "This program is not compatible with Window")
-    return()
+    RETURN()
 ENDIF()
 
 # Compiler flags
 if(CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_C_FLAGS "-O2")        ## Optimize
+    SET(CMAKE_C_FLAGS "-O2")        ## Optimize
 endif()
 
 ADD_EXECUTABLE(${EXECUTABLE_NAME} ${SOURCE})

@@ -19,33 +19,6 @@
 #include "browsedir.h"
 
 
-PRIVATE struct dirent* preload_dir(char* path, int* size)
-{
-    DIR* dir;
-    struct dirent* dirs_ent;
-    int i = 0;
-    *size = 0;
-    /* First get Size */
-    if((dir = opendir(path)) == NULL)
-        return NULL;
-    while ( readdir(dir) != NULL)
-        ++(*size);
-    rewinddir(dir);
-    /* Put all the dirent in an array */
-    dirs_ent = malloc(*size*sizeof(struct dirent));
-    if(dirs_ent == NULL){
-        perror("Malloc failed");
-        return NULL;
-    }
-    while(i < *size)
-    {
-        dirs_ent[i] = *readdir(dir);
-        ++i;
-    }
-    closedir(dir);
-    return dirs_ent;
-}
-
 PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
 {
     int *size = malloc(sizeof(int));
@@ -140,4 +113,31 @@ PUBLIC int start_browse(char* path, unsigned int rec_level, status* state)
     return SUCCESS;
 }
 
+
+PRIVATE struct dirent* preload_dir(char* path, int* size)
+{
+    DIR* dir;
+    struct dirent* dirs_ent;
+    int i = 0;
+    *size = 0;
+    /* First get Size */
+    if((dir = opendir(path)) == NULL)
+        return NULL;
+    while ( readdir(dir) != NULL)
+        ++(*size);
+    rewinddir(dir);
+    /* Put all the dirent in an array */
+    dirs_ent = malloc(*size*sizeof(struct dirent));
+    if(dirs_ent == NULL){
+        perror("Malloc failed");
+        return NULL;
+    }
+    while(i < *size)
+    {
+        dirs_ent[i] = *readdir(dir);
+        ++i;
+    }
+    closedir(dir);
+    return dirs_ent;
+}
 
