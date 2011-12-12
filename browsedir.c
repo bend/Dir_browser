@@ -19,7 +19,7 @@
 #include "browsedir.h"
 
 
-PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
+PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state, search_pattern* pattern)
 {
     int *size = malloc(sizeof(int));
     int i;
@@ -49,7 +49,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
                     if (state->opt->depth < rec_level)
                         return SUCCESS;	 /* Max depth reached */
 
-                    if (browse_dir(buffer, rec_level + 1, state) == FAILURE)
+                    if (browse_dir(buffer, rec_level + 1, state, pattern) == FAILURE)
                         continue;
                 }
 
@@ -77,7 +77,7 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state)
     return SUCCESS;
 }
 
-PUBLIC int start_browse(char* path, unsigned int rec_level, status* state)
+PUBLIC int start_browse(char* path, unsigned int rec_level, status* state, search_pattern* pattern)
 {
     struct stat file_status;
 
@@ -90,7 +90,7 @@ PUBLIC int start_browse(char* path, unsigned int rec_level, status* state)
     /* Check if file or Folder */
     if (file_status.st_mode & S_IFDIR)
     {
-        return browse_dir(path, rec_level, state); /* it's a folder */
+        return browse_dir(path, rec_level, state, pattern); /* it's a folder */
     }
 
     /* it's a file , so we print it */

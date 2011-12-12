@@ -31,10 +31,11 @@
 #include "status.h"
 #include "utils.h"
 #include "color.h"
+#include "search.h"
 
-_PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state )	);
+_PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state , search_pattern* pattern)	);
 
-_PROTOTYPE( int start_browse, (char* path, unsigned int rec_level, status* state )	);
+_PROTOTYPE( int start_browse, (char* path, unsigned int rec_level, status* state, search_pattern* pattern )	);
 
 _PROTOTYPE( struct dirent* preload_dir, (char* path, int* size )	);
 

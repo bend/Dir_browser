@@ -236,7 +236,8 @@ PUBLIC int main(int argc, char** argv)
             strncpy(path, ".\0", 2);
     }
     
-    if (start_browse(path, 0, state) == FAILURE)
+    /* TODO replace NULL */
+    if (start_browse(path, 0, state, NULL) == FAILURE)
         return EXIT_FAILURE;
 
     if (state->opt->d_total == ON)
