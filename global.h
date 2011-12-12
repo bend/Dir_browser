@@ -30,4 +30,8 @@
 #define FILE_SYM									'-'		/* The File symbol */
 #define TAB											"    "	/* The default tabultation */
 
+#define TYPE_F  'f'
+#define TYPE_D  'd'
+#define TYPE_N  'n'
+
 #endif

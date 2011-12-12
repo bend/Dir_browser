@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <dirent.h>
 #include <string.h>
 #include "global.h"
 
@@ -31,9 +32,16 @@ struct search_pattern
 {
     bool is_suffix;
     bool is_prefix;
+    char search_type;
     char* pattern;
 };
 
-_PROTOTYPE(bool is_searched, (search_pattern* pattern, char* filename));
+_PROTOTYPE(int search_pattern_alloc, (search_pattern** sp, char type, char* pattern ));
+
+_PROTOTYPE(void search_pattern_free, (search_pattern* sp) );
+
+_PROTOTYPE(bool is_searched, (search_pattern* pattern, struct dirent* ent));
+
+_PROTOTYPE(bool is_filename_match, (search_pattern *sp, char* filename));
 
 #endif
