@@ -36,6 +36,9 @@ DirBrowser has many features
 #### Options:
 
          --help                 : Display help
+       | --type f|d             : Process only type of file
+       | --name name            : Search only file with matching name or regex
+       | --execute command      : Execute command on each file
     -a | --hidden               : Display hidden files
     -A | --no-hidden            : Hide hidden files
     -c | --color                : Color display

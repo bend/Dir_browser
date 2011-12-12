@@ -17,7 +17,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define VERSION "v0.3.4"
+#define VERSION "v0.4"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,30 +35,30 @@ PRIVATE void usage()
 {
     printf("Usage : browsed [options] path\n");
     printf("Options :\n");
-    printf("   | --help\t\t\t: Display this help\n");
-    printf("   | --type f|d\t\t: Process only type of file\n");
-    printf("   | --name name\t\t: Search only file with matching name or regex\n");
-    printf("   | --execute command\t: Execute command on each file\n");
-    printf("-a | --hidden\t\t\t: Display hidden files\n");
-    printf("-A | --no-hidden\t\t: Hide hidden files\n");
-    printf("-c | --color\t\t\t: Color display\n");
-    printf("-C | --no-color\t\t\t: No color\n");
+    printf("   | --help\t\t\t\t: Display this help\n");
+    printf("   | --type f|d\t\t\t\t: Process only type of file\n");
+    printf("   | --name name\t\t\t: Search only file with matching name or regex\n");
+    printf("   | --execute command\t\t: Execute command on each file\n");
+    printf("-a | --hidden\t\t\t\t: Display hidden files\n");
+    printf("-A | --no-hidden\t\t\t: Hide hidden files\n");
+    printf("-c | --color\t\t\t\t: Color display\n");
+    printf("-C | --no-color\t\t\t\t: No color\n");
     printf("-h | --human-readable\t\t: Human readable\n");
-    printf("-v | --verbose\t\t\t: Verbose\n");
-    printf("-V | --no-verbose\t\t: No verbose\n");
-    printf("-m | --mode\t\t\t: Mode display\n");
-    printf("-M | --no-mode\t\t\t: No mode display\n");
-    printf("-l | --list\t\t\t: Nested display\n");
-    printf("-L | --tree\t\t\t: No nested display\n");
-    printf("-f | --follow-links\t\t: Follow links and non regular files\n");
+    printf("-v | --verbose\t\t\t\t: Verbose\n");
+    printf("-V | --no-verbose\t\t\t: No verbose\n");
+    printf("-m | --mode\t\t\t\t: Mode display\n");
+    printf("-M | --no-mode\t\t\t\t: No mode display\n");
+    printf("-l | --list\t\t\t\t: Nested display\n");
+    printf("-L | --tree\t\t\t\t: No nested display\n");
+    printf("-f | --follow-links\t\t\t: Follow links and non regular files\n");
     printf("-F | --no-follow-links\t\t: Do not follow links and non regular files\n");
-    printf("-t | --total\t\t\t: Total display\n");
-    printf("-T | --no-total\t\t\t: No total display\n");
-    printf("-d | --depth depth\t\t: Maximum recursion  depth \n");
+    printf("-t | --total\t\t\t\t: Total display\n");
+    printf("-T | --no-total\t\t\t\t: No total display\n");
+    printf("-d | --depth depth\t\t\t: Maximum recursion  depth \n");
     printf("-y | --file-symbol symbol\t: Represent file with symbol\n");
     printf("-z | --folder-symbol symbol\t: Represent folder with symbol\n");
-    printf("-s | --size \t\t\t: Display size for each file\n");
-    printf("-S | --no-size\t\t\t: Hide size for each file\n");
+    printf("-s | --size \t\t\t\t: Display size for each file\n");
+    printf("-S | --no-size\t\t\t\t: Hide size for each file\n");
 }
 
 PRIVATE void version()
