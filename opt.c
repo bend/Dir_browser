@@ -42,6 +42,8 @@ PUBLIC int alloc_options(options** opt)
     (*opt)->d_hidden = OFF;		/* do not display hidden files/folders by default */
     (*opt)->d_total = ON;		/* display grand total */
     (*opt)->d_size = ON;        /* display the size of each file */
+    (*opt)->execute_command = OFF;
+    (*opt)->command = "";
     return SUCCESS;
 }
 

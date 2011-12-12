@@ -32,6 +32,7 @@
 #include "utils.h"
 #include "color.h"
 #include "search.h"
+#include "executor.h"
 
 _PROTOTYPE( int browse_dir, (char* path, unsigned int rec_level, status* state , search_pattern* pattern)	);
 

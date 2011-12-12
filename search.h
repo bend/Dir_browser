@@ -36,12 +36,12 @@ struct search_pattern
     char* pattern;
 };
 
-_PROTOTYPE(int search_pattern_alloc, (search_pattern** sp, char type, char* pattern ));
+_PROTOTYPE(int alloc_search_pattern, (search_pattern** sp, char type, char* pattern ));
 
-_PROTOTYPE(void search_pattern_free, (search_pattern* sp) );
+_PROTOTYPE(void free_search_pattern, (search_pattern* sp) );
 
 _PROTOTYPE(bool is_searched, (search_pattern* pattern, struct dirent* ent));
 
-_PROTOTYPE(bool is_filename_match, (search_pattern *sp, char* filename));
+_PROTOTYPE(bool is_filename_match, (search_pattern* sp, char* filename));
 
 #endif

@@ -30,7 +30,10 @@ PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, st
     {
         for (i = 0; i < rec_level; i++)
             printf(TAB);
-    } else {
+    }
+
+    else
+    {
         if (build_path(path, ent->d_name, &abs_path) == FAILURE)
             return FAILURE;
 
@@ -47,10 +50,12 @@ PRIVATE int print_dir(char* path, struct dirent* ent, unsigned int rec_level, st
 
             if (print_mode(abs_path, state) == FAILURE)
                 return FAILURE;
+
             printf("\n");
         }
 
         else printf("\n");
+
         free(abs_path);
         return SUCCESS;
     }
@@ -88,11 +93,13 @@ PRIVATE int print_file(char* path, struct dirent* ent, unsigned int rec_level, s
     {
         for (i = 1; i < rec_level + 1; i++)
             printf("%s", TAB);
-    } else {
+    }
 
+    else
+    {
         if (build_path(path, ent->d_name, &abs_path) == FAILURE)
             return FAILURE;
-        
+
         if (state->opt->verbose == ON && state->opt->display != DIR_ONLY)
         {
             if (state->opt->color == ON)
@@ -101,7 +108,6 @@ PRIVATE int print_file(char* path, struct dirent* ent, unsigned int rec_level, s
             else
                 printf("%s%s ", NONE, abs_path);
         }
-
 
         if (state->opt->mode == ON && state->opt->display != DIR_ONLY &&
                 state->opt->verbose == ON)
@@ -115,8 +121,6 @@ PRIVATE int print_file(char* path, struct dirent* ent, unsigned int rec_level, s
 
         free(abs_path);
         return SUCCESS;
-
-
     }
 
     if (state->opt->verbose == ON && state->opt->display != DIR_ONLY)
@@ -153,7 +157,7 @@ PRIVATE int print_size(char* path, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        fprintf(stderr,"Stat failed: %s\n", path);
+        fprintf(stderr, "Stat failed: %s\n", path);
         return FAILURE;
     }
 
@@ -161,7 +165,9 @@ PRIVATE int print_size(char* path, status* state)
 
     if (state->opt->verbose == OFF || state->opt->display == DIR_ONLY)
         return SUCCESS;
-    if (state->opt->d_size == OFF){
+
+    if (state->opt->d_size == OFF)
+    {
         printf("\n");
         return SUCCESS;
     }
@@ -199,7 +205,7 @@ PRIVATE int print_mode(char* path, status* state)
 
     if (stat(path, &file_status) < 0)
     {
-        fprintf(stderr,"Stat failed: %s\n", path);
+        fprintf(stderr, "Stat failed: %s\n", path);
         return FAILURE;
     }
 

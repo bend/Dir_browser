@@ -21,16 +21,17 @@
 
 PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state, search_pattern* pattern)
 {
-    int *size = malloc(sizeof(int));
+    int* size = malloc(sizeof(int));
     int i;
     struct dirent* ent;
     struct dirent* dirs_ent;
     dirs_ent = preload_dir(path, size);
 
-    if(dirs_ent != NULL )
+    if (dirs_ent != NULL )
     {
         i = 0;
-        while (i< *size)
+
+        while (i < *size)
         {
             char* buffer;
             ent = &dirs_ent[i];
@@ -43,7 +44,14 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state, search_
             {
                 if (ent->d_type == DT_DIR) /* Directory */
                 {
-                    print_dir(path, ent, rec_level, state);
+                    if (is_searched(pattern, ent))
+                    {
+                        print_dir(path, ent, rec_level, state);
+
+                        if (state->opt->execute_command == ON)
+                            execute_command(state->opt->command, buffer);
+                    }
+
                     state->nb_folders++;
 
                     if (state->opt->depth < rec_level)
@@ -58,11 +66,19 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state, search_
                     if (ent->d_type == DT_LNK && state->opt->follow_link == OFF)	/* don't follow simlink*/
                         return SUCCESS;
 
-                    if (print_file(path, ent, rec_level, state) == FAILURE){
-                        ++i;
-                        free(buffer);
-                        continue;
+                    if (is_searched(pattern, ent))
+                    {
+                        if (print_file(path, ent, rec_level, state) == FAILURE)
+                        {
+                            ++i;
+                            free(buffer);
+                            continue;
+                        }
+
+                        if (state->opt->execute_command == ON)
+                            execute_command(state->opt->command, buffer);
                     }
+
                     state->nb_files++;
                 }
             }
@@ -71,9 +87,9 @@ PUBLIC int browse_dir(char* path, unsigned int rec_level, status* state, search_
             ++i;
         }
     }
+
     free(size);
     free(dirs_ent);
-
     return SUCCESS;
 }
 
@@ -120,23 +136,30 @@ PRIVATE struct dirent* preload_dir(char* path, int* size)
     struct dirent* dirs_ent;
     int i = 0;
     *size = 0;
+
     /* First get Size */
-    if((dir = opendir(path)) == NULL)
+    if ((dir = opendir(path)) == NULL)
         return NULL;
+
     while ( readdir(dir) != NULL)
         ++(*size);
+
     rewinddir(dir);
     /* Put all the dirent in an array */
-    dirs_ent = malloc(*size*sizeof(struct dirent));
-    if(dirs_ent == NULL){
+    dirs_ent = malloc(*size* sizeof(struct dirent));
+
+    if (dirs_ent == NULL)
+    {
         perror("Malloc failed");
         return NULL;
     }
-    while(i < *size)
+
+    while (i < *size)
     {
         dirs_ent[i] = *readdir(dir);
         ++i;
     }
+
     closedir(dir);
     return dirs_ent;
 }

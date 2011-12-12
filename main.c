@@ -29,11 +29,16 @@
 #include "status.h"
 #include "global.h"
 #include "opt.h"
+#include "search.h"
 
-PRIVATE void usage(){
+PRIVATE void usage()
+{
     printf("Usage : browsed [options] path\n");
     printf("Options :\n");
     printf("   | --help\t\t\t: Display this help\n");
+    printf("   | --type f|d\t\t: Process only type of file\n");
+    printf("   | --name name\t\t: Search only file with matching name or regex\n");
+    printf("   | --execute command\t: Execute command on each file\n");
     printf("-a | --hidden\t\t\t: Display hidden files\n");
     printf("-A | --no-hidden\t\t: Hide hidden files\n");
     printf("-c | --color\t\t\t: Color display\n");
@@ -56,20 +61,27 @@ PRIVATE void usage(){
     printf("-S | --no-size\t\t\t: Hide size for each file\n");
 }
 
-PRIVATE void version(){
-    printf("browsed %s\n",VERSION);
+PRIVATE void version()
+{
+    printf("browsed %s\n", VERSION);
     printf("http://bend.github.com/Dir_browser\n");
     printf("Author : Ben D.\n");
     printf("dbapps2@gmail.com\n");
     printf("Licensed under  GNU GENERAL PUBLIC LICENSE Version 3\n");
 }
 
-PRIVATE int parse_opt(int argc, char** argv, status* state)
+PRIVATE int parse_opt(int argc, char** argv, status* state, search_pattern** sp)
 {
     int c;
-    static struct option long_options[] = {
+    bool alloc = false;
+    static struct option long_options[] =
+    {
         {"version", no_argument, NULL, 0},
         {"help", no_argument, NULL, 1},
+        {"type", required_argument, NULL, 2},
+        {"name", required_argument, NULL, 3},
+        {"execute", required_argument, NULL, 4},
+        {"exec", required_argument, NULL, 4},
         {"hidden", no_argument, NULL, 'a'},
         {"color", no_argument, NULL, 'c'},
         {"size", no_argument, NULL, 's'},
@@ -93,19 +105,37 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
         {NULL, 0, NULL, 0}
     };
     int option_index = 0;
-    
+
     while ((c = getopt_long (argc, argv, "sSaAcChHvVmMlLfFtTd:Dy:z:0", long_options, &option_index)) != -1)    /*Parse arguments*/
     {
         switch (c)
         {
-            case 0:
+            case 0:         /* Display version */
                 version();
                 exit(0);
                 break;
-            case 1:
+
+            case 1:         /* Display help */
                 usage();
                 exit(0);
                 break;
+
+            case 2:         /* Type */
+                /* TODO check chars */
+                alloc_search_pattern(sp, ((char*)optarg)[0], "");
+                alloc = true;
+                break;
+
+            case 3:         /* Name */
+                alloc_search_pattern(sp, TYPE_N, (char*)optarg);
+                alloc = true;
+                break;
+
+            case 4:         /* Execute */
+                state->opt->execute_command = ON;
+                state->opt->command = (char*)optarg;
+                break;
+
             case 'a':		/* show hidden files/folders */
                 state->opt->d_hidden = ON;
                 break;
@@ -201,6 +231,11 @@ PRIVATE int parse_opt(int argc, char** argv, status* state)
         }
     }
 
+    if (!alloc)
+    {
+        alloc_search_pattern(sp, TYPE_ALL, "");
+    }
+
     return SUCCESS;
 }
 
@@ -211,11 +246,12 @@ PUBLIC int main(int argc, char** argv)
     status* state;
     char path[MAX_PATH];
     int len = 0;
+    search_pattern* pattern;
 
     if (alloc_status(&state) == FAILURE)
         return EXIT_FAILURE;
 
-    if (parse_opt(argc, argv, state) == FAILURE)
+    if (parse_opt(argc, argv, state, &pattern) == FAILURE)
         return EXIT_FAILURE;
 
     /* if no path provided take the current one */
@@ -235,9 +271,8 @@ PUBLIC int main(int argc, char** argv)
         if (path[0] == '-')
             strncpy(path, ".\0", 2);
     }
-    
-    /* TODO replace NULL */
-    if (start_browse(path, 0, state, NULL) == FAILURE)
+
+    if (start_browse(path, 0, state, pattern) == FAILURE)
         return EXIT_FAILURE;
 
     if (state->opt->d_total == ON)

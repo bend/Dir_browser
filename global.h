@@ -33,5 +33,6 @@
 #define TYPE_F  'f'
 #define TYPE_D  'd'
 #define TYPE_N  'n'
+#define TYPE_ALL '*'
 
 #endif

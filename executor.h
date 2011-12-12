@@ -22,8 +22,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "global.h"
 
-_PROTOTYPE( int execute_command, (char* command));
+_PROTOTYPE( int execute_command, (char* command, char* path));
 
 #endif
