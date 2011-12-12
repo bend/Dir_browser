@@ -60,7 +60,9 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 	<li> Mode display</li>
 	<li> Nested display of files/folders</li>
 	<li> Total size display</li>
-	<li> Total number of files/folders display</li>
+    <li> Total number of files/folders display</li>
+    <li> Search filename based on patterns</li>
+    <li> Execute command on each file found</li>
 	<li>...</li>
 	</p><h2>Install</h2>
     <p>
@@ -101,29 +103,33 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 
 <pre>
 <code>
--a : display hidden files
--A : hide hidden files
--c : color display
--C : no color
--h : human readable
--H : no human readable
--v : verbose
--V : no verbose
--m : mode display
--M : no mode display
--l : nested display
--L : no nested display
--f : follow links and non regular files
--F : do not follow links and non regular files
--t : total display
--T : no total display
--d depth : maximum recursion  depth 
--D : no maximum recursion depth
--y symbol : represent file with symbol
--z symbol : represent folder with symbol
--s : display size for each file
--S : hide size for each file
 
+Usage : browsed [options] path
+Options :
+   | --help				    : Display this help
+   | --type f|d				: Process only type of file
+   | --name name			: Search only file with matching name or regex
+   | --execute command		: Execute command on each file
+-a | --hidden				: Display hidden files
+-A | --no-hidden			: Hide hidden files
+-c | --color				: Color display
+-C | --no-color				: No color
+-h | --human-readable		: Human readable
+-v | --verbose				: Verbose
+-V | --no-verbose			: No verbose
+-m | --mode				    : Mode display
+-M | --no-mode				: No mode display
+-l | --list				    : Nested display
+-L | --tree				    : No nested display
+-f | --follow-links			: Follow links and non regular files
+-F | --no-follow-links		: Do not follow links and non regular files
+-t | --total				: Total display
+-T | --no-total				: No total display
+-d | --depth depth			: Maximum recursion  depth 
+-y | --file-symbol symbol	: Represent file with symbol
+-z | --folder-symbol symbol	: Represent folder with symbol
+-s | --size 				: Display size for each file
+-S | --no-size				: Hide size for each file
 </code>
 </pre>
         <div>
