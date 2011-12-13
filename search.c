@@ -22,6 +22,7 @@
 
 PUBLIC int alloc_search_pattern(search_pattern** sp, char type, char* pattern)
 {
+    int len, i;
     *sp = malloc(sizeof(search_pattern));
 
     if (*sp == NULL)
@@ -45,12 +46,23 @@ PUBLIC int alloc_search_pattern(search_pattern** sp, char type, char* pattern)
             (*sp)->search_type = TYPE_N;
 
             if (pattern[0] == '*')
+            {
                 (*sp)->is_suffix = true;
+                len = strlen(pattern);
+
+                for (i = 0; i < len; ++i)
+                {
+                    pattern[i] = pattern[i + 1];
+                }
+            }
 
             else (*sp)->is_suffix = false;
 
             if (pattern[strlen(pattern) - 1 ] == '*')
+            {
                 (*sp)->is_prefix = true;
+                pattern[strlen(pattern) - 1] = '\0';
+            }
 
             else (*sp)->is_prefix = false;
 
