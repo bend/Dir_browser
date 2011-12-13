@@ -104,7 +104,12 @@ PRIVATE bool is_filename_match(search_pattern* sp, char* filename)
 {
     int i, j;
     bool ok = false;
-
+    if(sp->is_suffix && sp->is_prefix)
+    {   
+        if(strstr(filename, sp->pattern) == NULL)
+            return false;
+        return true;
+    }
     if (sp->is_suffix)
     {
         /* looking for *pattern */
