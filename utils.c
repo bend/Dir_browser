@@ -86,36 +86,31 @@ PUBLIC int size_convert(unsigned long size, char** converted)
     if ((size / 1e12) > 1)
     {
         conv_size = size / 1e12;
-        gcvt(conv_size, 5, *converted);
-        strncat(*converted, " TB", 3);
+        sprintf(*converted, "%.3f TB",conv_size);
     }
 
     else if ((size / 1e9) > 1)
     {
         conv_size = size / 1e9;
-        gcvt(conv_size, 5, *converted);
-        strncat(*converted, " GB", 3);
+        sprintf(*converted, "%.3f GB",conv_size);
     }
 
     else if (size / 1e6 > 1)
     {
         conv_size = size / 1e6;
-        gcvt(conv_size, 5, *converted);
-        strncat(*converted, " MB", 3);
+        sprintf(*converted, "%.3f MB",conv_size);
     }
 
     else if (size / 1e3 > 1)
     {
         conv_size = size / 1e3;
-        gcvt(conv_size, 5, *converted);
-        strncat(*converted, " KB", 3);
+        sprintf(*converted, "%.3f KB",conv_size);
     }
 
     else
     {
         conv_size = size;
-        gcvt(conv_size, 5, *converted);
-        strncat(*converted, " B", 3);
+        sprintf(*converted, "%.3f B",conv_size);
     }
 
     return SUCCESS;

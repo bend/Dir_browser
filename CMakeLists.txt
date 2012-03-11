@@ -6,12 +6,7 @@ SET(EXECUTABLE_NAME browsed)
 
 SET(CMAKE_BUILD_TYPE Release)
 
-ADD_DEFINITIONS(
-    -Wall
-    -Werror
-    -ansi 
-    -pedantic
-    )
+
 FILE(GLOB SOURCE *.c)
 
 FILE(GLOB HEADERS *.h)
@@ -22,9 +17,7 @@ IF(WIN32)
 ENDIF()
 
 # Compiler flags
-if(CMAKE_COMPILER_IS_GNUC)
-    SET(CMAKE_C_FLAGS "-O2")        ## Optimize
-endif()
+SET(CMAKE_C_FLAGS " -Wall -Werror -ansi -pedantic -g -std=gnu99 -O2")        ## Optimize
 
 ADD_EXECUTABLE(${EXECUTABLE_NAME} ${SOURCE})
 
