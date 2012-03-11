@@ -17,7 +17,7 @@ IF(WIN32)
 ENDIF()
 
 # Compiler flags
-SET(CMAKE_C_FLAGS " -Wall -Werror -ansi -pedantic -g -std=gnu99 -O2")        ## Optimize
+SET(CMAKE_C_FLAGS " -Wall -Werror -ansi -pedantic -std=gnu99 -O2")        ## Optimize
 
 ADD_EXECUTABLE(${EXECUTABLE_NAME} ${SOURCE})
 
